@@ -28,9 +28,8 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Portfolio', path: '/services' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Projects', path: '/references' },
+    { name: 'Skills', path: '/services' },
+    { name: 'Projects', path: 'https://github.com/Mahathirrr', external: true },
     { name: 'Contact', path: '/booking' },
   ];
 
@@ -55,18 +54,30 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <NavLink
-              key={link.path}
-              to={link.path}
-              className={({ isActive }) =>
-                cn(
-                  'text-white hover:text-green-400 transition-colors duration-300 link-hover text-sm font-medium tracking-wide',
-                  isActive && 'text-green-500 after:w-full'
-                )
-              }
-            >
-              {link.name}
-            </NavLink>
+            link.external ? (
+              <a
+                key={link.path}
+                href={link.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-green-400 transition-colors duration-300 link-hover text-sm font-medium tracking-wide"
+              >
+                {link.name}
+              </a>
+            ) : (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                className={({ isActive }) =>
+                  cn(
+                    'text-white hover:text-green-400 transition-colors duration-300 link-hover text-sm font-medium tracking-wide',
+                    isActive && 'text-green-500 after:w-full'
+                  )
+                }
+              >
+                {link.name}
+              </NavLink>
+            )
           ))}
         </div>
 
@@ -88,18 +99,30 @@ const Navbar = () => {
       >
         <div className="flex flex-col space-y-4">
           {navLinks.map((link) => (
-            <NavLink
-              key={link.path}
-              to={link.path}
-              className={({ isActive }) =>
-                cn(
-                  'text-white hover:text-green-400 py-2 text-xl transition-colors duration-300',
-                  isActive && 'text-green-500'
-                )
-              }
-            >
-              {link.name}
-            </NavLink>
+            link.external ? (
+              <a
+                key={link.path}
+                href={link.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-green-400 py-2 text-xl transition-colors duration-300"
+              >
+                {link.name}
+              </a>
+            ) : (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                className={({ isActive }) =>
+                  cn(
+                    'text-white hover:text-green-400 py-2 text-xl transition-colors duration-300',
+                    isActive && 'text-green-500'
+                  )
+                }
+              >
+                {link.name}
+              </NavLink>
+            )
           ))}
         </div>
       </div>

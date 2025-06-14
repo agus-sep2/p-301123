@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Github, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -23,12 +23,12 @@ const Footer = () => {
               </h2>
             </div>
             <p className="text-gray-300 max-w-md">
-              Full-stack developer passionate about creating innovative digital solutions. 
-              Specialized in web development, mobile apps, and exceptional user experiences.
+              Full-stack developer specialized in Vue.js frontend, Golang backend, and data science. 
+              Passionate about creating innovative digital solutions.
             </p>
             <div className="flex space-x-4 pt-2">
               <a 
-                href="https://github.com" 
+                href="https://github.com/Mahathirrr" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-green-400 transition-colors"
@@ -36,20 +36,12 @@ const Footer = () => {
                 <Github size={20} />
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/muhammad-mahathir/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-green-400 transition-colors"
               >
                 <Linkedin size={20} />
-              </a>
-              <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-green-400 transition-colors"
-              >
-                <Twitter size={20} />
               </a>
             </div>
           </div>
@@ -73,24 +65,18 @@ const Footer = () => {
                   to="/services" 
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
-                  Portfolio
+                  Skills
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/blog" 
-                  className="text-gray-300 hover:text-green-400 transition-colors"
-                >
-                  Blog
-                </NavLink>
-              </li>
-              <li>
-                <NavLink 
-                  to="/references" 
+                <a 
+                  href="https://github.com/Mahathirrr" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   Projects
-                </NavLink>
+                </a>
               </li>
               <li>
                 <NavLink 
@@ -111,17 +97,28 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-center space-x-3 text-gray-300">
                 <Mail size={16} className="text-green-500" />
-                <span>mahathir.dev@gmail.com</span>
+                <span>muhammad.mahathir.id@gmail.com</span>
               </li>
               <li className="flex items-center space-x-3 text-gray-300">
                 <Github size={16} className="text-green-500" />
                 <a 
-                  href="https://github.com" 
+                  href="https://github.com/Mahathirrr" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-green-400 transition-colors"
                 >
-                  github.com/mahathir
+                  github.com/Mahathirrr
+                </a>
+              </li>
+              <li className="flex items-center space-x-3 text-gray-300">
+                <Linkedin size={16} className="text-green-500" />
+                <a 
+                  href="https://www.linkedin.com/in/muhammad-mahathir/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-green-400 transition-colors"
+                >
+                  LinkedIn Profile
                 </a>
               </li>
             </ul>

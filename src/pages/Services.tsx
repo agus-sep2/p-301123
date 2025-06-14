@@ -1,6 +1,6 @@
 
 import React, { useEffect } from "react";
-import { Code, Palette, Smartphone, Database, Globe, Server, MoveRight } from "lucide-react";
+import { Code, Database, BarChart3, Server, Globe, MoveRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Services = () => {
@@ -11,67 +11,67 @@ const Services = () => {
 
   const mainServices = [
     {
-      id: "web",
+      id: "frontend",
       icon: <Code size={32} />,
-      title: "Web Development",
-      description: "Building modern, responsive web applications using cutting-edge technologies like React, TypeScript, and Node.js. From simple landing pages to complex web applications.",
+      title: "Frontend Development",
+      description: "Building modern, responsive web applications using Vue.js. Creating interactive user interfaces with clean, maintainable code and optimal performance.",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
       features: [
-        "React & TypeScript",
-        "Node.js & Express",
+        "Vue.js 3 & Composition API",
         "Responsive Design",
-        "Modern CSS & Tailwind",
-        "API Integration",
+        "Modern CSS & SCSS",
+        "Component-Based Architecture",
+        "State Management (Vuex/Pinia)",
         "Performance Optimization"
       ]
     },
     {
-      id: "design",
-      icon: <Palette size={32} />,
-      title: "UI/UX Design",
-      description: "Creating beautiful and intuitive user interfaces with focus on user experience. I design interfaces that are not only visually appealing but also highly functional.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80",
+      id: "backend",
+      icon: <Database size={32} />,
+      title: "Backend Development",
+      description: "Developing robust and scalable backend systems using Golang. Building efficient APIs, microservices, and server-side applications with high performance.",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80",
       features: [
-        "User Interface Design",
-        "User Experience Research",
-        "Prototyping & Wireframing",
-        "Design Systems",
-        "Mobile-First Design",
-        "Accessibility Standards"
+        "Golang (Go)",
+        "RESTful APIs",
+        "Microservices Architecture",
+        "Database Design & Optimization",
+        "Concurrent Programming",
+        "Performance & Scalability"
       ]
     },
     {
-      id: "mobile",
-      icon: <Smartphone size={32} />,
-      title: "Mobile Development",
-      description: "Developing cross-platform mobile applications that deliver exceptional performance and user experience on both iOS and Android platforms.",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80",
+      id: "datascience",
+      icon: <BarChart3 size={32} />,
+      title: "Data Science",
+      description: "Extracting insights from data through analysis, machine learning, and statistical modeling. Helping businesses make data-driven decisions.",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
       features: [
-        "React Native",
-        "Cross-Platform Development",
-        "Native Performance",
-        "App Store Deployment",
-        "Push Notifications",
-        "Offline Functionality"
+        "Python & R",
+        "Machine Learning",
+        "Data Analysis & Visualization",
+        "Statistical Modeling",
+        "Data Pipeline Development",
+        "Business Intelligence"
       ]
     }
   ];
 
   const additionalServices = [
     {
-      icon: <Database size={24} />,
-      title: "Database Design",
-      description: "Efficient database architecture and optimization."
-    },
-    {
       icon: <Server size={24} />,
-      title: "Backend Development",
-      description: "Robust server-side applications and APIs."
+      title: "API Development",
+      description: "RESTful APIs and microservices using Golang."
     },
     {
       icon: <Globe size={24} />,
       title: "Web Optimization",
       description: "Performance optimization and SEO improvements."
+    },
+    {
+      icon: <Database size={24} />,
+      title: "Database Design",
+      description: "Efficient database architecture and optimization."
     }
   ];
 
@@ -85,18 +85,20 @@ const Services = () => {
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-fade-in">My Portfolio</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-fade-in">My Skills & Expertise</h1>
             <p className="text-xl text-gray-300 mb-8 animate-fade-in animation-delay-100">
-              Showcasing my expertise in full-stack development, UI/UX design, and mobile applications. 
-              I create digital solutions that combine functionality with exceptional user experience.
+              Specialized in Vue.js frontend development, Golang backend systems, and data science. 
+              I create efficient, scalable solutions that drive business value.
             </p>
-            <Link
-              to="/booking"
+            <a
+              href="https://github.com/Mahathirrr"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center bg-psyco-green-DEFAULT hover:bg-psyco-green-dark text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow animate-fade-in animation-delay-200"
             >
-              Contact Me
+              View Projects
               <MoveRight className="ml-2 h-5 w-5" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -107,7 +109,7 @@ const Services = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-white mb-2">What I Offer</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Comprehensive development and design solutions for your digital needs
+              Comprehensive development solutions using modern technologies
             </p>
           </div>
           
@@ -196,7 +198,7 @@ const Services = () => {
           <div className="glassmorphism p-8 md:p-12 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start Your Project?</h2>
             <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-              Let's collaborate to bring your ideas to life. I'm here to help you create exceptional digital experiences.
+              Let's collaborate to bring your ideas to life using Vue.js, Golang, and data science expertise.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -206,12 +208,14 @@ const Services = () => {
                 Contact Me
                 <MoveRight className="ml-2 h-5 w-5" />
               </Link>
-              <Link
-                to="/references"
+              <a
+                href="https://github.com/Mahathirrr"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-transparent border border-psyco-green-DEFAULT text-psyco-green-DEFAULT hover:bg-psyco-green-DEFAULT/10 font-medium py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center"
               >
                 View My Work
-              </Link>
+              </a>
             </div>
           </div>
         </div>

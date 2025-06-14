@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import ServiceCard from "@/components/ServiceCard";
 import { Link } from "react-router-dom";
-import { Code, Palette, Database, Smartphone, MoveRight, User } from "lucide-react";
+import { Code, Database, BarChart3, MoveRight } from "lucide-react";
 
 const Index = () => {
   // Scroll to top on page load
@@ -13,25 +13,25 @@ const Index = () => {
 
   const featuredServices = [
     {
-      title: "Web Development",
-      description: "Modern and responsive web applications using React, TypeScript, and cutting-edge technologies.",
+      title: "Frontend Development",
+      description: "Modern web applications using Vue.js with responsive design and optimal user experience.",
       icon: <Code size={24} />,
       imageSrc: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
-      link: "/services#web"
+      link: "/services#frontend"
     },
     {
-      title: "UI/UX Design",
-      description: "Creating beautiful and intuitive user interfaces with focus on user experience and modern design principles.",
-      icon: <Palette size={24} />,
-      imageSrc: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80",
-      link: "/services#design"
+      title: "Backend Development",
+      description: "Robust and scalable backend systems using Golang for high-performance applications.",
+      icon: <Database size={24} />,
+      imageSrc: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80",
+      link: "/services#backend"
     },
     {
-      title: "Mobile Development",
-      description: "Cross-platform mobile applications that deliver exceptional performance and user experience.",
-      icon: <Smartphone size={24} />,
-      imageSrc: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80",
-      link: "/services#mobile"
+      title: "Data Science",
+      description: "Data analysis, machine learning, and insights extraction to drive business decisions.",
+      icon: <BarChart3 size={24} />,
+      imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
+      link: "/services#datascience"
     }
   ];
 
@@ -46,7 +46,7 @@ const Index = () => {
             <div>
               <h2 className="text-3xl font-bold text-white mb-2">My Expertise</h2>
               <p className="text-gray-400 max-w-2xl">
-                Specialized skills and technologies I use to create exceptional digital experiences
+                Specialized skills and technologies I use to create exceptional digital solutions
               </p>
             </div>
             <Link 
@@ -77,16 +77,15 @@ const Index = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-2">What I Do</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              I create innovative digital solutions across various platforms and technologies
+              I create innovative digital solutions using modern technologies
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {[
-              { name: "Frontend", icon: <Code size={32} /> },
-              { name: "Backend", icon: <Database size={32} /> },
-              { name: "Mobile", icon: <Smartphone size={32} /> },
-              { name: "UI/UX", icon: <Palette size={32} /> }
+              { name: "Vue.js", icon: <Code size={32} /> },
+              { name: "Golang", icon: <Database size={32} /> },
+              { name: "Data Science", icon: <BarChart3 size={32} /> }
             ].map((specialty, index) => (
               <div 
                 key={index}
@@ -102,12 +101,20 @@ const Index = () => {
           </div>
           
           <div className="mt-12 text-center">
+            <a
+              href="https://github.com/Mahathirrr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-psyco-green-DEFAULT hover:bg-psyco-green-dark text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow mr-4"
+            >
+              View Projects
+              <MoveRight className="ml-2 h-5 w-5" />
+            </a>
             <Link
               to="/booking"
-              className="inline-flex items-center bg-psyco-green-DEFAULT hover:bg-psyco-green-dark text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow"
+              className="inline-flex items-center bg-transparent border border-psyco-green-DEFAULT text-psyco-green-DEFAULT hover:bg-psyco-green-DEFAULT/10 font-medium py-3 px-8 rounded-lg transition-all duration-300"
             >
               Get In Touch
-              <MoveRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
         </div>
@@ -123,7 +130,7 @@ const Index = () => {
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start a Project?</h2>
             <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-              Let's work together to bring your ideas to life. I'm passionate about creating innovative solutions that make a difference.
+              Let's work together to bring your ideas to life. I'm passionate about creating innovative solutions using Vue.js, Golang, and data science.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -133,12 +140,14 @@ const Index = () => {
                 Contact Me
                 <MoveRight className="ml-2 h-5 w-5" />
               </Link>
-              <Link
-                to="/services"
+              <a
+                href="https://github.com/Mahathirrr"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-transparent border border-psyco-green-DEFAULT text-psyco-green-DEFAULT hover:bg-psyco-green-DEFAULT/10 font-medium py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center"
               >
-                View Portfolio
-              </Link>
+                View GitHub
+              </a>
             </div>
           </div>
         </div>
