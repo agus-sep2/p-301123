@@ -1,14 +1,15 @@
-
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { PersonalInfo, Service, Project } from "@/types/database";
-import { Plus, Edit, Trash2, Save, X } from "lucide-react";
+import { Plus, Edit, Trash2, Save, X, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
-const Admin = () => {
+const AdminContent = () => {
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo | null>(null);
   const [services, setServices] = useState<Service[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -20,6 +21,7 @@ const Admin = () => {
   const [showNewService, setShowNewService] = useState(false);
   const [showNewProject, setShowNewProject] = useState(false);
   const { toast } = useToast();
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     fetchData();
@@ -44,6 +46,14 @@ const Admin = () => {
         variant: "destructive"
       });
     }
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast({
+      title: "Success",
+      description: "Successfully logged out"
+    });
   };
 
   const updatePersonalInfo = async (data: Partial<PersonalInfo>) => {
@@ -244,7 +254,16 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-black text-white p-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-green-400 mb-8">Portfolio Admin</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold text-green-400">Portfolio Admin</h1>
+          <div className="flex items-center gap-4">
+            <span className="text-gray-300">Welcome, {user?.email}</span>
+            <Button onClick={handleSignOut} variant="outline" size="sm">
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
+          </div>
+        </div>
 
         {/* Personal Information Section */}
         <section className="mb-12">
@@ -627,6 +646,14 @@ const ProjectForm: React.FC<{
         </Button>
       </div>
     </div>
+  );
+};
+
+const Admin = () => {
+  return (
+    <ProtectedRoute>
+      <AdminContent />
+    </ProtectedRoute>
   );
 };
 
