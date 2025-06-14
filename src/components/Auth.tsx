@@ -18,21 +18,29 @@ const Auth = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
+      console.log('Attempting login with email:', email);
+      
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
         password
       });
       
-      if (error) throw error;
+      if (error) {
+        console.error('Login error:', error);
+        throw error;
+      }
+      
+      console.log('Login successful:', data);
       
       toast({
         title: "Success",
         description: "Successfully logged in"
       });
     } catch (error: any) {
+      console.error('Auth error:', error);
       toast({
         title: "Error",
-        description: error.message,
+        description: error.message || "Invalid login credentials",
         variant: "destructive"
       });
     } finally {
@@ -62,7 +70,7 @@ const Auth = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@portfolio.com"
+                  placeholder="Enter admin email"
                   className="pl-10 bg-black/50 border-green-500/20 text-white placeholder-gray-400"
                   required
                 />
@@ -99,6 +107,12 @@ const Auth = () => {
               {loading ? 'Processing...' : 'Sign In'}
             </Button>
           </form>
+
+          <div className="mt-6 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
+            <p className="text-yellow-400 text-sm text-center">
+              Admin access only. Contact administrator for credentials.
+            </p>
+          </div>
         </div>
       </div>
     </div>
