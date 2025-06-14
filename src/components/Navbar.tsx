@@ -24,6 +24,8 @@ const Navbar = () => {
 
   useEffect(() => {
     setIsOpen(false);
+    // Scroll to top when route changes
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   const navLinks = [
@@ -33,6 +35,14 @@ const Navbar = () => {
     { name: 'Contact', path: '/booking' },
   ];
 
+  const handleNavClick = () => {
+    // Close mobile menu and scroll to top
+    setIsOpen(false);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
+  };
+
   return (
     <nav
       className={cn(
@@ -41,7 +51,11 @@ const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <NavLink to="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-500">
+        <NavLink 
+          to="/" 
+          className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-500"
+          onClick={handleNavClick}
+        >
           Muhammad Mahathir
         </NavLink>
 
@@ -51,6 +65,7 @@ const Navbar = () => {
             <NavLink
               key={link.path}
               to={link.path}
+              onClick={handleNavClick}
               className={({ isActive }) =>
                 cn(
                   'text-white hover:text-green-400 transition-colors duration-300 link-hover text-sm font-medium tracking-wide',
@@ -84,6 +99,7 @@ const Navbar = () => {
             <NavLink
               key={link.path}
               to={link.path}
+              onClick={handleNavClick}
               className={({ isActive }) =>
                 cn(
                   'text-white hover:text-green-400 py-2 text-xl transition-colors duration-300',
