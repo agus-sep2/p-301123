@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Mail, Github, Linkedin, Code } from 'lucide-react';
+import { Mail, Github, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -10,17 +10,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Logo and Description */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="bg-gradient-to-r from-green-400 to-green-600 p-2 rounded-lg">
-                <Code className="h-6 w-6 text-white" />
-              </div>
-              <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-500">
-                Muhammad Mahathir
-              </h2>
-            </div>
+            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-500">
+              Muhammad Mahathir
+            </h2>
             <p className="text-gray-300 max-w-md">
-              Full-stack developer specialized in Vue.js frontend, Golang backend, and data science. 
-              Passionate about creating innovative digital solutions.
+              Full-stack developer passionate about creating innovative digital solutions 
+              with modern web technologies and data-driven insights.
             </p>
             <div className="flex space-x-4 pt-2">
               <a 

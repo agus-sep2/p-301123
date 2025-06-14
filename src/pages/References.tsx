@@ -11,8 +11,8 @@ const References = () => {
   const projects = [
     {
       id: 1,
-      title: "Vue.js E-Commerce Platform",
-      description: "Modern e-commerce application built with Vue.js 3, featuring product catalog, shopping cart, and user authentication with responsive design.",
+      title: "Modern E-Commerce Platform",
+      description: "Responsive e-commerce application with product catalog, shopping cart, and user authentication featuring clean, maintainable code architecture.",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
       category: "Frontend",
       icon: <Code size={20} />,
@@ -22,8 +22,8 @@ const References = () => {
     },
     {
       id: 2,
-      title: "Golang REST API Server",
-      description: "High-performance REST API server built with Golang, featuring JWT authentication, database integration, and comprehensive testing.",
+      title: "High-Performance API Server",
+      description: "Scalable REST API server with JWT authentication, database integration, comprehensive testing, and optimized performance.",
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80",
       category: "Backend",
       icon: <Database size={20} />,
@@ -33,8 +33,8 @@ const References = () => {
     },
     {
       id: 3,
-      title: "Data Analysis Dashboard",
-      description: "Interactive data visualization dashboard for business intelligence, featuring real-time analytics and machine learning insights.",
+      title: "Business Intelligence Dashboard",
+      description: "Interactive data visualization platform for business analytics featuring real-time insights and machine learning predictions.",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
       category: "Data Science",
       icon: <BarChart3 size={20} />,
@@ -45,7 +45,7 @@ const References = () => {
     {
       id: 4,
       title: "Microservices Architecture",
-      description: "Scalable microservices system using Golang, with service discovery, load balancing, and distributed tracing for enterprise applications.",
+      description: "Enterprise-grade microservices system with service discovery, load balancing, and distributed tracing for scalable applications.",
       image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80",
       category: "Backend",
       icon: <Database size={20} />,
@@ -55,8 +55,8 @@ const References = () => {
     },
     {
       id: 5,
-      title: "Vue.js Task Management",
-      description: "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
+      title: "Collaborative Task Manager",
+      description: "Real-time task management application with drag-and-drop functionality, team collaboration, and project tracking capabilities.",
       image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80",
       category: "Frontend",
       icon: <Code size={20} />,
@@ -66,8 +66,8 @@ const References = () => {
     },
     {
       id: 6,
-      title: "Machine Learning Pipeline",
-      description: "End-to-end machine learning pipeline for predictive analytics, including data preprocessing, model training, and deployment.",
+      title: "ML Pipeline Platform",
+      description: "End-to-end machine learning pipeline for predictive analytics including data preprocessing, model training, and automated deployment.",
       image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80",
       category: "Data Science",
       icon: <BarChart3 size={20} />,
@@ -89,21 +89,21 @@ const References = () => {
       {/* Hero Section */}
       <section className="bg-psyco-black-light py-20 px-6 md:px-12 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute w-96 h-96 bg-psyco-green-DEFAULT/10 rounded-full blur-3xl top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute w-96 h-96 bg-green-500/10 rounded-full blur-3xl top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2"></div>
         </div>
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-fade-in">My Projects</h1>
             <p className="text-xl text-gray-300 mb-8 animate-fade-in animation-delay-100 max-w-3xl mx-auto">
-              A showcase of my work in Vue.js frontend development, Golang backend systems, and data science projects. 
-              Each project demonstrates my expertise in creating efficient, scalable solutions.
+              A showcase of my work in modern web development, scalable backend systems, and data science solutions. 
+              Each project demonstrates expertise in creating efficient, maintainable software.
             </p>
             <a
               href="https://github.com/Mahathirrr"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center bg-psyco-green-DEFAULT hover:bg-psyco-green-dark text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow animate-fade-in animation-delay-200"
+              className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow animate-fade-in animation-delay-200"
             >
               <Github className="mr-2 h-5 w-5" />
               View All on GitHub
@@ -123,8 +123,8 @@ const References = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
                   selectedCategory === category
-                    ? 'bg-psyco-green-DEFAULT text-white'
-                    : 'bg-psyco-black-light text-gray-300 hover:text-white hover:bg-psyco-green-DEFAULT/20'
+                    ? 'bg-green-500 text-white'
+                    : 'bg-psyco-black-light text-gray-300 hover:text-white hover:bg-green-500/20'
                 }`}
               >
                 {category}
@@ -150,17 +150,18 @@ const References = () => {
                     alt={project.title}
                     className="object-cover h-full w-full transition-transform duration-500 hover:scale-110"
                   />
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-psyco-green-DEFAULT text-white px-3 py-1 rounded-full text-sm font-medium flex items-center">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                  <div className="absolute top-4 left-4 z-10">
+                    <div className="bg-green-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium flex items-center shadow-lg">
                       {project.icon}
                       <span className="ml-2">{project.category}</span>
                     </div>
                   </div>
-                  <div className="absolute top-4 right-4">
-                    <div className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  <div className="absolute top-4 right-4 z-10">
+                    <div className={`px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm shadow-lg ${
                       project.status === 'Completed' 
-                        ? 'bg-green-500/20 text-green-400' 
-                        : 'bg-yellow-500/20 text-yellow-400'
+                        ? 'bg-green-500/90 text-white' 
+                        : 'bg-yellow-500/90 text-white'
                     }`}>
                       {project.status}
                     </div>
@@ -177,7 +178,7 @@ const References = () => {
                       {project.technologies.map((tech, idx) => (
                         <span 
                           key={idx}
-                          className="bg-psyco-black-light text-psyco-green-DEFAULT px-2 py-1 rounded text-xs font-medium"
+                          className="bg-psyco-black-light text-green-400 px-2 py-1 rounded text-xs font-medium border border-green-500/20"
                         >
                           {tech}
                         </span>
@@ -189,7 +190,7 @@ const References = () => {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-psyco-green-DEFAULT hover:text-psyco-green-light transition-colors font-medium"
+                    className="inline-flex items-center text-green-400 hover:text-green-300 transition-colors font-medium"
                   >
                     <Github className="mr-2 h-4 w-4" />
                     View Source
@@ -214,7 +215,7 @@ const References = () => {
             href="https://github.com/Mahathirrr"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center bg-psyco-green-DEFAULT hover:bg-psyco-green-dark text-white font-medium py-4 px-8 rounded-lg transition-all duration-300 btn-glow"
+            className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-medium py-4 px-8 rounded-lg transition-all duration-300 btn-glow"
           >
             <Github className="mr-2 h-5 w-5" />
             Visit My GitHub

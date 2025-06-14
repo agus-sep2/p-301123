@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Code } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
@@ -41,13 +41,8 @@ const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <NavLink to="/" className="flex items-center space-x-2">
-          <div className="bg-gradient-to-r from-green-400 to-green-600 p-2 rounded-lg">
-            <Code className="h-6 w-6 text-white" />
-          </div>
-          <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-500">
-            Muhammad Mahathir
-          </span>
+        <NavLink to="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-500">
+          Muhammad Mahathir
         </NavLink>
 
         {/* Desktop Navigation */}

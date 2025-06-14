@@ -58,8 +58,8 @@ const HeroSection = () => {
             </h1>
             
             <p className="text-xl text-gray-300 mb-8">
-              A passionate developer creating innovative digital solutions. 
-              I specialize in building modern web applications, mobile apps, and exceptional user experiences.
+              A passionate developer creating innovative digital solutions with modern web technologies, 
+              backend systems, and data-driven insights to deliver exceptional user experiences.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
