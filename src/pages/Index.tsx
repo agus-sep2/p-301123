@@ -1,8 +1,9 @@
+
 import React, { useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import ServiceCard from "@/components/ServiceCard";
 import { Link } from "react-router-dom";
-import { Volume2, Music2, Lightbulb, PartyPopper, MoveRight, CalendarDays } from "lucide-react";
+import { Code, Palette, Database, Smartphone, MoveRight, User } from "lucide-react";
 
 const Index = () => {
   // Scroll to top on page load
@@ -12,25 +13,25 @@ const Index = () => {
 
   const featuredServices = [
     {
-      title: "Sound System",
-      description: "Professional sound systems for any size venue, from small gatherings to large festivals.",
-      icon: <Volume2 size={24} />,
-      imageSrc: "/lovable-uploads/708f9e32-840d-46a4-aaa4-75ad2689e16f.png",
-      link: "/services#sound"
+      title: "Web Development",
+      description: "Modern and responsive web applications using React, TypeScript, and cutting-edge technologies.",
+      icon: <Code size={24} />,
+      imageSrc: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
+      link: "/services#web"
     },
     {
-      title: "Lighting Equipment",
-      description: "Create the perfect atmosphere with our state-of-the-art lighting equipment and expert setup.",
-      icon: <Lightbulb size={24} />,
-      imageSrc: "/lovable-uploads/becfc2e3-b59f-4f86-afca-b9f6fc7b7c14.png",
-      link: "/services#lighting"
+      title: "UI/UX Design",
+      description: "Creating beautiful and intuitive user interfaces with focus on user experience and modern design principles.",
+      icon: <Palette size={24} />,
+      imageSrc: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80",
+      link: "/services#design"
     },
     {
-      title: "DJ Services",
-      description: "Experienced DJs to keep your event energized with the perfect music selection.",
-      icon: <Music2 size={24} />,
-      imageSrc: "/lovable-uploads/03e83f18-76a1-4349-a197-dbde03a93343.png",
-      link: "/services#dj"
+      title: "Mobile Development",
+      description: "Cross-platform mobile applications that deliver exceptional performance and user experience.",
+      icon: <Smartphone size={24} />,
+      imageSrc: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80",
+      link: "/services#mobile"
     }
   ];
 
@@ -43,16 +44,16 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">Our Services</h2>
+              <h2 className="text-3xl font-bold text-white mb-2">My Expertise</h2>
               <p className="text-gray-400 max-w-2xl">
-                Professional equipment and expert technicians for all your sound and lighting needs
+                Specialized skills and technologies I use to create exceptional digital experiences
               </p>
             </div>
             <Link 
               to="/services"
               className="mt-4 sm:mt-0 flex items-center text-psyco-green-DEFAULT hover:text-psyco-green-light transition-colors"
             >
-              View all services
+              View all skills
               <MoveRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
@@ -70,32 +71,32 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Event Types Section */}
+      {/* Specializations Section */}
       <section className="py-20 px-6 md:px-12 bg-psyco-black-light">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-2">Perfect for Any Event</h2>
+            <h2 className="text-3xl font-bold text-white mb-2">What I Do</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              We provide custom sound and lighting solutions for a wide range of events
+              I create innovative digital solutions across various platforms and technologies
             </p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {[
-              { name: "Concerts", icon: <Volume2 size={32} /> },
-              { name: "Weddings", icon: <PartyPopper size={32} /> },
-              { name: "Corporate", icon: <CalendarDays size={32} /> },
-              { name: "Festivals", icon: <Music2 size={32} /> }
-            ].map((event, index) => (
+              { name: "Frontend", icon: <Code size={32} /> },
+              { name: "Backend", icon: <Database size={32} /> },
+              { name: "Mobile", icon: <Smartphone size={32} /> },
+              { name: "UI/UX", icon: <Palette size={32} /> }
+            ].map((specialty, index) => (
               <div 
                 key={index}
                 className="glassmorphism flex flex-col items-center justify-center py-8 px-4 text-center card-hover animate-fade-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="text-psyco-green-DEFAULT mb-4">
-                  {event.icon}
+                  {specialty.icon}
                 </div>
-                <h3 className="text-lg font-medium text-white">{event.name}</h3>
+                <h3 className="text-lg font-medium text-white">{specialty.name}</h3>
               </div>
             ))}
           </div>
@@ -105,7 +106,7 @@ const Index = () => {
               to="/booking"
               className="inline-flex items-center bg-psyco-green-DEFAULT hover:bg-psyco-green-dark text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow"
             >
-              Book Your Event
+              Get In Touch
               <MoveRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
@@ -120,23 +121,23 @@ const Index = () => {
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Elevate Your Event?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start a Project?</h2>
             <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-              Let's work together to create an unforgettable experience for your guests. Book our services today and bring your vision to life.
+              Let's work together to bring your ideas to life. I'm passionate about creating innovative solutions that make a difference.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/booking"
                 className="bg-psyco-green-DEFAULT hover:bg-psyco-green-dark text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center btn-glow"
               >
-                Book Now
+                Contact Me
                 <MoveRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
                 to="/services"
                 className="bg-transparent border border-psyco-green-DEFAULT text-psyco-green-DEFAULT hover:bg-psyco-green-DEFAULT/10 font-medium py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center"
               >
-                View Services
+                View Portfolio
               </Link>
             </div>
           </div>

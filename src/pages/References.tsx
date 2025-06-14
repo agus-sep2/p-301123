@@ -10,13 +10,13 @@ const References = () => {
 
   return (
     <div className="pt-20">
-      {/* Featured Project */}
+      {/* Featured Projects */}
       <section className="py-16 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-2">Featured Projects</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Some of our most memorable sound and lighting installations
+              A showcase of my most impactful web and mobile development projects
             </p>
           </div>
           
@@ -24,16 +24,16 @@ const References = () => {
             <div className="glassmorphism p-1 h-full animate-fade-in">
               <div className="relative h-full w-full overflow-hidden rounded-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80"
-                  alt="Summer Music Festival"
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80"
+                  alt="E-Commerce Platform"
                   className="object-cover h-full w-full transition-transform duration-10000 hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-psyco-black-DEFAULT to-transparent flex flex-col justify-end p-6">
                   <div className="bg-psyco-green-DEFAULT inline-block px-3 py-1 text-xs font-medium text-white rounded-full mb-2 self-start">
-                    Festival
+                    Web App
                   </div>
-                  <h3 className="text-2xl font-semibold text-white mb-2">Summer Music Festival 2023</h3>
-                  <p className="text-gray-300 mb-4">Complete sound system and dynamic lighting setup for the main stage, serving an audience of 15,000 people.</p>
+                  <h3 className="text-2xl font-semibold text-white mb-2">E-Commerce Platform</h3>
+                  <p className="text-gray-300 mb-4">Full-stack e-commerce solution with React frontend, Node.js backend, and integrated payment system serving 10,000+ users.</p>
                 </div>
               </div>
             </div>
@@ -41,16 +41,16 @@ const References = () => {
             <div className="glassmorphism p-1 h-full animate-fade-in animation-delay-100">
               <div className="relative h-full w-full overflow-hidden rounded-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1478147427282-58a87a120781?auto=format&fit=crop&q=80"
-                  alt="Corporate Gala"
+                  src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80"
+                  alt="Task Management App"
                   className="object-cover h-full w-full transition-transform duration-10000 hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-psyco-black-DEFAULT to-transparent flex flex-col justify-end p-6">
                   <div className="bg-psyco-green-DEFAULT inline-block px-3 py-1 text-xs font-medium text-white rounded-full mb-2 self-start">
-                    Corporate
+                    Mobile App
                   </div>
-                  <h3 className="text-2xl font-semibold text-white mb-2">TechCorp Annual Gala</h3>
-                  <p className="text-gray-300 mb-4">Custom lighting design incorporating brand colors and theme elements, with pristine audio for presentations and live music.</p>
+                  <h3 className="text-2xl font-semibold text-white mb-2">Task Management App</h3>
+                  <p className="text-gray-300 mb-4">Cross-platform mobile application built with React Native, featuring real-time collaboration and offline functionality.</p>
                 </div>
               </div>
             </div>
@@ -58,16 +58,16 @@ const References = () => {
             <div className="glassmorphism p-1 h-full animate-fade-in animation-delay-200">
               <div className="relative h-full w-full overflow-hidden rounded-xl">
                 <img
-                  src="/lovable-uploads/48e75083-18aa-4df9-bc91-8515485aa465.png"
-                  alt="Monegros Festival 2024"
+                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80"
+                  alt="Portfolio Website"
                   className="object-cover h-full w-full transition-transform duration-10000 hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-psyco-black-DEFAULT to-transparent flex flex-col justify-end p-6">
                   <div className="bg-psyco-green-DEFAULT inline-block px-3 py-1 text-xs font-medium text-white rounded-full mb-2 self-start">
-                    Festival
+                    UI/UX Design
                   </div>
-                  <h3 className="text-2xl font-semibold text-white mb-2">Monegros Festival 2024 - Industry City PA</h3>
-                  <p className="text-gray-300 mb-4">Professional PA system installation providing crystal-clear sound coverage for the entire Industry City Stage in collaboration with KWS and UF.</p>
+                  <h3 className="text-2xl font-semibold text-white mb-2">Creative Portfolio Website</h3>
+                  <p className="text-gray-300 mb-4">Modern portfolio website with stunning animations and interactive elements, showcasing creative work with exceptional user experience.</p>
                 </div>
               </div>
             </div>

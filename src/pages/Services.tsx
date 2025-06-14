@@ -1,5 +1,6 @@
+
 import React, { useEffect } from "react";
-import { Volume2, Lightbulb, Music2, Speaker, Mic, MonitorSpeaker, Wrench, Video, Film, MoveRight } from "lucide-react";
+import { Code, Palette, Smartphone, Database, Globe, Server, MoveRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Services = () => {
@@ -10,81 +11,67 @@ const Services = () => {
 
   const mainServices = [
     {
-      id: "sound",
-      icon: <Volume2 size={32} />,
-      title: "Sound System",
-      description: "Professional sound setups tailored to your venue and event size. From intimate gatherings to large festival spaces, we provide crystal-clear audio with expert setup and operation.",
-      image: "/lovable-uploads/708f9e32-840d-46a4-aaa4-75ad2689e16f.png",
+      id: "web",
+      icon: <Code size={32} />,
+      title: "Web Development",
+      description: "Building modern, responsive web applications using cutting-edge technologies like React, TypeScript, and Node.js. From simple landing pages to complex web applications.",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
       features: [
-        "6x Funktion One Res E4",
-        "4x Martin Audio Bass Bin 215",
-        "8x KWS Pi-Horn sub",
-        "powered by 5x Labgruppen PLM 20000Q",
-        "complete cabling and power management"
+        "React & TypeScript",
+        "Node.js & Express",
+        "Responsive Design",
+        "Modern CSS & Tailwind",
+        "API Integration",
+        "Performance Optimization"
       ]
     },
     {
-      id: "lighting",
-      icon: <Lightbulb size={32} />,
-      title: "Lighting Equipment",
-      description: "Create the perfect atmosphere with our state-of-the-art lighting equipment. From subtle ambient lighting to dynamic stage shows, we design and operate custom lighting solutions.",
-      image: "/lovable-uploads/becfc2e3-b59f-4f86-afca-b9f6fc7b7c14.png",
+      id: "design",
+      icon: <Palette size={32} />,
+      title: "UI/UX Design",
+      description: "Creating beautiful and intuitive user interfaces with focus on user experience. I design interfaces that are not only visually appealing but also highly functional.",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80",
       features: [
-        "Moving head fixtures",
-        "LED wash lights",
-        "Beam effects",
-        "Stage spotlights",
-        "Laser systems",
-        "DMX controllers and programming"
+        "User Interface Design",
+        "User Experience Research",
+        "Prototyping & Wireframing",
+        "Design Systems",
+        "Mobile-First Design",
+        "Accessibility Standards"
       ]
     },
     {
-      id: "dj",
-      icon: <Music2 size={32} />,
-      title: "DJ Services",
-      description: "Our professional DJs bring the right energy to your event with perfect music selection and mixing. We work with you to create custom playlists that match your event's vibe and audience.",
-      image: "https://images.unsplash.com/photo-1516873240891-4bf014728d44?auto=format&fit=crop&q=80",
+      id: "mobile",
+      icon: <Smartphone size={32} />,
+      title: "Mobile Development",
+      description: "Developing cross-platform mobile applications that deliver exceptional performance and user experience on both iOS and Android platforms.",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80",
       features: [
-        "Experienced professional DJs",
-        "High-quality controllers and equipment",
-        "Extensive music library",
-        "Custom playlist creation",
-        "Seamless mixing",
-        "MC services available"
+        "React Native",
+        "Cross-Platform Development",
+        "Native Performance",
+        "App Store Deployment",
+        "Push Notifications",
+        "Offline Functionality"
       ]
     }
   ];
 
   const additionalServices = [
     {
-      icon: <Speaker size={24} />,
-      title: "PA Rental",
-      description: "Complete PA systems for events of any size."
+      icon: <Database size={24} />,
+      title: "Database Design",
+      description: "Efficient database architecture and optimization."
     },
     {
-      icon: <Mic size={24} />,
-      title: "Microphone Systems",
-      description: "Professional-grade wired and wireless microphones."
+      icon: <Server size={24} />,
+      title: "Backend Development",
+      description: "Robust server-side applications and APIs."
     },
     {
-      icon: <MonitorSpeaker size={24} />,
-      title: "Studio Monitoring",
-      description: "High-quality monitoring for recording sessions."
-    },
-    {
-      icon: <Wrench size={24} />,
-      title: "Technical Support",
-      description: "On-site technicians to ensure everything runs smoothly."
-    },
-    {
-      icon: <Video size={24} />,
-      title: "Visual Equipment",
-      description: "Projectors, LED screens, and visual mapping solutions."
-    },
-    {
-      icon: <Film size={24} />,
-      title: "Special Effects",
-      description: "Fog machines, CO2 jets, and other special effects."
+      icon: <Globe size={24} />,
+      title: "Web Optimization",
+      description: "Performance optimization and SEO improvements."
     }
   ];
 
@@ -98,15 +85,16 @@ const Services = () => {
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-fade-in">Our Services</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-fade-in">My Portfolio</h1>
             <p className="text-xl text-gray-300 mb-8 animate-fade-in animation-delay-100">
-              Professional sound and lighting solutions for events of all sizes. From intimate gatherings to large-scale productions, we have the expertise and equipment to make your event exceptional.
+              Showcasing my expertise in full-stack development, UI/UX design, and mobile applications. 
+              I create digital solutions that combine functionality with exceptional user experience.
             </p>
             <Link
               to="/booking"
               className="inline-flex items-center bg-psyco-green-DEFAULT hover:bg-psyco-green-dark text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow animate-fade-in animation-delay-200"
             >
-              Book a Service
+              Contact Me
               <MoveRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
@@ -117,9 +105,9 @@ const Services = () => {
       <section className="py-20 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-2">What We Offer</h2>
+            <h2 className="text-3xl font-bold text-white mb-2">What I Offer</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Comprehensive sound and lighting solutions for any event
+              Comprehensive development and design solutions for your digital needs
             </p>
           </div>
           
@@ -150,7 +138,7 @@ const Services = () => {
                 <p className="text-gray-300 mb-6">{service.description}</p>
                 
                 <div className="bg-psyco-black-light rounded-xl p-6">
-                  <h4 className="text-lg font-medium text-white mb-4">{service.id === 'sound' ? 'Our Equipment:' : 'What\'s Included:'}</h4>
+                  <h4 className="text-lg font-medium text-white mb-4">Technologies & Skills:</h4>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
@@ -176,7 +164,7 @@ const Services = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-white mb-2">Additional Services</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Specialized equipment and services to enhance your event
+              Supporting services to enhance your digital projects
             </p>
           </div>
           
@@ -206,23 +194,23 @@ const Services = () => {
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="glassmorphism p-8 md:p-12 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Make Your Event Exceptional?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start Your Project?</h2>
             <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-              Our team of experts is ready to help you plan and execute the perfect audio-visual experience for your event.
+              Let's collaborate to bring your ideas to life. I'm here to help you create exceptional digital experiences.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/booking"
                 className="bg-psyco-green-DEFAULT hover:bg-psyco-green-dark text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center btn-glow"
               >
-                Book Now
+                Contact Me
                 <MoveRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
                 to="/references"
                 className="bg-transparent border border-psyco-green-DEFAULT text-psyco-green-DEFAULT hover:bg-psyco-green-DEFAULT/10 font-medium py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center"
               >
-                View Our References
+                View My Work
               </Link>
             </div>
           </div>

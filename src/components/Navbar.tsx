@@ -28,10 +28,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
+    { name: 'Portfolio', path: '/services' },
     { name: 'Blog', path: '/blog' },
-    { name: 'References', path: '/references' },
-    { name: 'Booking', path: '/booking' },
+    { name: 'Projects', path: '/references' },
+    { name: 'Contact', path: '/booking' },
   ];
 
   return (
@@ -46,7 +46,7 @@ const Navbar = () => {
           <div className="h-20 w-auto md:h-28 md:w-auto relative">
             <img 
               src="/lovable-uploads/5964f950-36a7-430c-a887-4eea91ad4973.png" 
-              alt="PSK Services Logo" 
+              alt="Muhammad Mahathir Logo" 
               className="h-full w-auto object-contain" 
             />
           </div>
