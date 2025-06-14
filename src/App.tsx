@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Services from "./pages/Services";
 import References from "./pages/References";
 import Booking from "./pages/Booking";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/references" element={<References />} />
             <Route path="/booking" element={<Booking />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

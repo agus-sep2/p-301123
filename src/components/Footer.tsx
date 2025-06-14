@@ -1,9 +1,32 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Mail, Github, Linkedin } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { PersonalInfo } from '@/types/database';
 
 const Footer = () => {
+  const [personalInfo, setPersonalInfo] = useState<PersonalInfo | null>(null);
+
+  useEffect(() => {
+    fetchPersonalInfo();
+  }, []);
+
+  const fetchPersonalInfo = async () => {
+    try {
+      const { data } = await supabase
+        .from('personal_info')
+        .select('*')
+        .single();
+      
+      if (data) setPersonalInfo(data);
+    } catch (error) {
+      console.error('Error fetching personal info:', error);
+    }
+  };
+
+  if (!personalInfo) return null;
+
   return (
     <footer className="bg-black border-t border-green-500/10">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
@@ -11,29 +34,32 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="space-y-4">
             <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-500">
-              Muhammad Mahathir
+              {personalInfo.name}
             </h2>
             <p className="text-gray-300 max-w-md">
-              Full-stack developer passionate about creating innovative digital solutions 
-              with modern web technologies and data-driven insights.
+              {personalInfo.description}
             </p>
             <div className="flex space-x-4 pt-2">
-              <a 
-                href="https://github.com/Mahathirrr" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-green-400 transition-colors"
-              >
-                <Github size={20} />
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/muhammad-mahathir/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-green-400 transition-colors"
-              >
-                <Linkedin size={20} />
-              </a>
+              {personalInfo.github_url && (
+                <a 
+                  href={personalInfo.github_url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-green-400 transition-colors"
+                >
+                  <Github size={20} />
+                </a>
+              )}
+              {personalInfo.linkedin_url && (
+                <a 
+                  href={personalInfo.linkedin_url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-green-400 transition-colors"
+                >
+                  <Linkedin size={20} />
+                </a>
+              )}
             </div>
           </div>
 
@@ -86,37 +112,41 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-center space-x-3 text-gray-300">
                 <Mail size={16} className="text-green-500" />
-                <span>muhammad.mahathir.id@gmail.com</span>
+                <span>{personalInfo.email}</span>
               </li>
-              <li className="flex items-center space-x-3 text-gray-300">
-                <Github size={16} className="text-green-500" />
-                <a 
-                  href="https://github.com/Mahathirrr" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="hover:text-green-400 transition-colors"
-                >
-                  github.com/Mahathirrr
-                </a>
-              </li>
-              <li className="flex items-center space-x-3 text-gray-300">
-                <Linkedin size={16} className="text-green-500" />
-                <a 
-                  href="https://www.linkedin.com/in/muhammad-mahathir/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="hover:text-green-400 transition-colors"
-                >
-                  LinkedIn Profile
-                </a>
-              </li>
+              {personalInfo.github_url && (
+                <li className="flex items-center space-x-3 text-gray-300">
+                  <Github size={16} className="text-green-500" />
+                  <a 
+                    href={personalInfo.github_url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-green-400 transition-colors"
+                  >
+                    GitHub Profile
+                  </a>
+                </li>
+              )}
+              {personalInfo.linkedin_url && (
+                <li className="flex items-center space-x-3 text-gray-300">
+                  <Linkedin size={16} className="text-green-500" />
+                  <a 
+                    href={personalInfo.linkedin_url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-green-400 transition-colors"
+                  >
+                    LinkedIn Profile
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
 
         <div className="border-t border-green-500/10 mt-12 pt-6 text-center">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Muhammad Mahathir. All rights reserved.
+            © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
           </p>
         </div>
       </div>
