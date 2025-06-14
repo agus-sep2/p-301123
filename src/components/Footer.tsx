@@ -60,6 +60,12 @@ const Footer = () => {
                   <Linkedin size={20} />
                 </a>
               )}
+              <a 
+                href={`mailto:${personalInfo.email}`}
+                className="text-gray-400 hover:text-green-400 transition-colors"
+              >
+                <Mail size={20} />
+              </a>
             </div>
           </div>
 
@@ -112,7 +118,12 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-center space-x-3 text-gray-300">
                 <Mail size={16} className="text-green-500" />
-                <span>{personalInfo.email}</span>
+                <a 
+                  href={`mailto:${personalInfo.email}`}
+                  className="hover:text-green-400 transition-colors"
+                >
+                  {personalInfo.email}
+                </a>
               </li>
               {personalInfo.github_url && (
                 <li className="flex items-center space-x-3 text-gray-300">
