@@ -1,86 +1,196 @@
 
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import HeroSection from "@/components/HeroSection";
+import ServiceCard from "@/components/ServiceCard";
+import { Link } from "react-router-dom";
+import { Code, Database, BarChart3, MoveRight } from "lucide-react";
+import { supabase } from '@/integrations/supabase/client';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-psyco-black-light to-black">
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-        {/* Background particles/dots effect */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-20 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <div className="absolute top-40 right-32 w-1 h-1 bg-green-300 rounded-full animate-ping"></div>
-          <div className="absolute bottom-32 left-16 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
-          <div className="absolute top-1/2 left-1/4 w-1 h-1 bg-green-300 rounded-full animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/3 w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
-        </div>
+  const [services, setServices] = useState([]);
+  const [personalInfo, setPersonalInfo] = useState(null);
 
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="text-white">Hi, I'm </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600 animate-pulse">
-                Mahathir
-              </span>
-            </h1>
-            <div className="text-2xl md:text-3xl text-gray-300 mb-8">
-              <span className="typing-animation">Full Stack Developer</span>
+  // Scroll to top on page load
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      // Fetch services
+      const { data: servicesData } = await supabase
+        .from('services')
+        .select('*')
+        .limit(3);
+      
+      // Fetch personal info
+      const { data: personalData } = await supabase
+        .from('personal_info')
+        .select('*')
+        .single();
+      
+      if (servicesData) setServices(servicesData);
+      if (personalData) setPersonalInfo(personalData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const getIconComponent = (iconName) => {
+    switch (iconName) {
+      case 'Code': return <Code size={24} />;
+      case 'Database': return <Database size={24} />;
+      case 'BarChart3': return <BarChart3 size={24} />;
+      default: return <Code size={24} />;
+    }
+  };
+
+  const featuredServices = services.length > 0 ? services.map(service => ({
+    title: service.title,
+    description: service.description,
+    icon: getIconComponent(service.icon),
+    imageSrc: service.image_url || "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
+    link: `/services#${service.title.toLowerCase().replace(/\s+/g, '')}`
+  })) : [
+    {
+      title: "Frontend Development",
+      description: "Modern web applications with responsive design and optimal user experience using cutting-edge frameworks.",
+      icon: <Code size={24} />,
+      imageSrc: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
+      link: "/services#frontend"
+    },
+    {
+      title: "Backend Development",
+      description: "Robust and scalable server-side applications with efficient APIs and high-performance architecture.",
+      icon: <Database size={24} />,
+      imageSrc: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80",
+      link: "/services#backend"
+    },
+    {
+      title: "Data Science",
+      description: "Data analysis, machine learning, and insights extraction to drive informed business decisions.",
+      icon: <BarChart3 size={24} />,
+      imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
+      link: "/services#datascience"
+    }
+  ];
+
+  return (
+    <div>
+      <HeroSection />
+      
+      {/* Services Section */}
+      <section className="py-20 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12">
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-2">My Expertise</h2>
+              <p className="text-gray-400 max-w-2xl">
+                Specialized skills and technologies I use to create exceptional digital solutions
+              </p>
             </div>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Passionate about creating innovative web solutions with modern technologies. 
-              Specializing in React, Node.js, and cloud platforms to build scalable applications.
+            <Link 
+              to="/services"
+              className="mt-4 sm:mt-0 flex items-center text-green-400 hover:text-green-300 transition-colors"
+            >
+              View all skills
+              <MoveRight className="ml-1 h-4 w-4" />
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredServices.map((service, index) => (
+              <ServiceCard
+                key={index}
+                {...service}
+                className="animate-fade-in"
+                style={{ animationDelay: `${index * 100}ms` }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      {/* Specializations Section */}
+      <section className="py-20 px-6 md:px-12 bg-psyco-black-light">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white mb-2">What I Do</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              I create innovative digital solutions using modern technologies
             </p>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <button className="group bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-green-500/25">
-              <span className="flex items-center gap-2">
-                View My Work
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </span>
-            </button>
-            <button className="border border-green-500 text-green-400 hover:bg-green-500 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
-              Get In Touch
-            </button>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+            {[
+              { name: "Frontend", icon: <Code size={32} /> },
+              { name: "Backend", icon: <Database size={32} /> },
+              { name: "Data Science", icon: <BarChart3 size={32} /> }
+            ].map((specialty, index) => (
+              <div 
+                key={index}
+                className="glassmorphism flex flex-col items-center justify-center py-8 px-4 text-center card-hover animate-fade-in"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="text-green-400 mb-4">
+                  {specialty.icon}
+                </div>
+                <h3 className="text-lg font-medium text-white">{specialty.name}</h3>
+              </div>
+            ))}
           </div>
-
-          {/* Tech Stack Icons */}
-          <div className="flex flex-wrap justify-center gap-8 opacity-70">
-            <div className="flex flex-col items-center group">
-              <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-gray-700 transition-colors">
-                <span className="text-blue-400 font-bold text-xl">R</span>
-              </div>
-              <span className="text-gray-400 text-sm mt-2">React</span>
-            </div>
-            <div className="flex flex-col items-center group">
-              <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-gray-700 transition-colors">
-                <span className="text-green-400 font-bold text-xl">N</span>
-              </div>
-              <span className="text-gray-400 text-sm mt-2">Node.js</span>
-            </div>
-            <div className="flex flex-col items-center group">
-              <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-gray-700 transition-colors">
-                <span className="text-blue-500 font-bold text-xl">TS</span>
-              </div>
-              <span className="text-gray-400 text-sm mt-2">TypeScript</span>
-            </div>
-            <div className="flex flex-col items-center group">
-              <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-gray-700 transition-colors">
-                <span className="text-cyan-400 font-bold text-xl">TW</span>
-              </div>
-              <span className="text-gray-400 text-sm mt-2">Tailwind</span>
-            </div>
+          
+          <div className="mt-12 text-center">
+            <a
+              href={personalInfo?.github_url || "https://github.com/Mahathirrr"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow mr-4"
+            >
+              View Projects
+              <MoveRight className="ml-2 h-5 w-5" />
+            </a>
+            <Link
+              to="/booking"
+              className="inline-flex items-center bg-transparent border border-green-500 text-green-500 hover:bg-green-500/10 font-medium py-3 px-8 rounded-lg transition-all duration-300"
+            >
+              Get In Touch
+            </Link>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+      </section>
+      
+      {/* CTA Section */}
+      <section className="py-20 px-6 md:px-12 bg-psyco-black-light relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute w-96 h-96 bg-green-500/10 rounded-full blur-3xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start a Project?</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto mb-8">
+              Let's work together to bring your ideas to life using modern web technologies, efficient backend systems, and data-driven solutions.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/booking"
+                className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center btn-glow"
+              >
+                Contact Me
+                <MoveRight className="ml-2 h-5 w-5" />
+              </Link>
+              <a
+                href={personalInfo?.github_url || "https://github.com/Mahathirrr"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-transparent border border-green-500 text-green-500 hover:bg-green-500/10 font-medium py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center"
+              >
+                View GitHub
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </div>

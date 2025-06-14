@@ -19,6 +19,21 @@ const Auth = () => {
 
     try {
       console.log('Attempting login with email:', email);
+      console.log('Password length:', password.length);
+      
+      // Check if user exists first
+      const { data: userData, error: userError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('email', email.trim())
+        .single();
+      
+      if (userError) {
+        console.error('User lookup error:', userError);
+        throw new Error('User not found in system');
+      }
+      
+      console.log('User found:', userData);
       
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email.trim(),
@@ -110,7 +125,7 @@ const Auth = () => {
 
           <div className="mt-6 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
             <p className="text-yellow-400 text-sm text-center">
-              Admin access only. Contact administrator for credentials.
+              Test credentials: admin@mahathirportfolio.com / MahathirAdmin2024!
             </p>
           </div>
         </div>
