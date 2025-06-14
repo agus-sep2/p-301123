@@ -11,7 +11,6 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
   const { toast } = useToast();
 
   const handleAuth = async (e: React.FormEvent) => {
@@ -19,34 +18,17 @@ const Auth = () => {
     setLoading(true);
 
     try {
-      if (isSignUp) {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/admin`
-          }
-        });
-        
-        if (error) throw error;
-        
-        toast({
-          title: "Success",
-          description: "Check your email to confirm your account"
-        });
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password
-        });
-        
-        if (error) throw error;
-        
-        toast({
-          title: "Success",
-          description: "Successfully logged in"
-        });
-      }
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+      
+      if (error) throw error;
+      
+      toast({
+        title: "Success",
+        description: "Successfully logged in"
+      });
     } catch (error: any) {
       toast({
         title: "Error",
@@ -64,10 +46,10 @@ const Auth = () => {
         <div className="glassmorphism p-8 rounded-lg">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-white mb-2">
-              {isSignUp ? 'Create Admin Account' : 'Admin Login'}
+              Admin Login
             </h1>
             <p className="text-gray-400">
-              {isSignUp ? 'Sign up to manage the portfolio' : 'Sign in to access the admin dashboard'}
+              Sign in to access the admin dashboard
             </p>
           </div>
 
@@ -80,7 +62,7 @@ const Auth = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@example.com"
+                  placeholder="admin@portfolio.com"
                   className="pl-10 bg-black/50 border-green-500/20 text-white placeholder-gray-400"
                   required
                 />
@@ -114,18 +96,9 @@ const Auth = () => {
               disabled={loading}
               className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3"
             >
-              {loading ? 'Processing...' : (isSignUp ? 'Sign Up' : 'Sign In')}
+              {loading ? 'Processing...' : 'Sign In'}
             </Button>
           </form>
-
-          <div className="mt-6 text-center">
-            <button
-              onClick={() => setIsSignUp(!isSignUp)}
-              className="text-green-400 hover:text-green-300 text-sm"
-            >
-              {isSignUp ? 'Already have an account? Sign in' : 'Need an admin account? Sign up'}
-            </button>
-          </div>
         </div>
       </div>
     </div>
