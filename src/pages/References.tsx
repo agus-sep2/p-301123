@@ -12,12 +12,12 @@ const References = () => {
     {
       id: 1,
       title: "Vue.js E-Commerce Platform",
-      description: "Modern e-commerce application built with Vue.js 3, featuring product catalog, shopping cart, and user authentication.",
+      description: "Modern e-commerce application built with Vue.js 3, featuring product catalog, shopping cart, and user authentication with responsive design.",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
       category: "Frontend",
       icon: <Code size={20} />,
       technologies: ["Vue.js 3", "Composition API", "Vuex", "SCSS", "Responsive Design"],
-      githubUrl: "https://github.com/Mahathirrr",
+      githubUrl: "https://github.com/Mahathirrr/vue-ecommerce",
       status: "Completed"
     },
     {
@@ -28,7 +28,7 @@ const References = () => {
       category: "Backend",
       icon: <Database size={20} />,
       technologies: ["Golang", "Gin Framework", "PostgreSQL", "JWT", "Docker"],
-      githubUrl: "https://github.com/Mahathirrr",
+      githubUrl: "https://github.com/Mahathirrr/golang-api",
       status: "Completed"
     },
     {
@@ -39,18 +39,18 @@ const References = () => {
       category: "Data Science",
       icon: <BarChart3 size={20} />,
       technologies: ["Python", "Pandas", "Plotly", "Scikit-learn", "Streamlit"],
-      githubUrl: "https://github.com/Mahathirrr",
-      status: "In Progress"
+      githubUrl: "https://github.com/Mahathirrr/data-dashboard",
+      status: "Completed"
     },
     {
       id: 4,
       title: "Microservices Architecture",
-      description: "Scalable microservices system using Golang, with service discovery, load balancing, and distributed tracing.",
+      description: "Scalable microservices system using Golang, with service discovery, load balancing, and distributed tracing for enterprise applications.",
       image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80",
       category: "Backend",
       icon: <Database size={20} />,
       technologies: ["Golang", "Docker", "Kubernetes", "gRPC", "Redis"],
-      githubUrl: "https://github.com/Mahathirrr",
+      githubUrl: "https://github.com/Mahathirrr/microservices",
       status: "Completed"
     },
     {
@@ -61,7 +61,7 @@ const References = () => {
       category: "Frontend",
       icon: <Code size={20} />,
       technologies: ["Vue.js", "Pinia", "Socket.io", "TypeScript", "Tailwind CSS"],
-      githubUrl: "https://github.com/Mahathirrr",
+      githubUrl: "https://github.com/Mahathirrr/vue-task-manager",
       status: "Completed"
     },
     {
@@ -72,7 +72,7 @@ const References = () => {
       category: "Data Science",
       icon: <BarChart3 size={20} />,
       technologies: ["Python", "TensorFlow", "Apache Airflow", "MLflow", "AWS"],
-      githubUrl: "https://github.com/Mahathirrr",
+      githubUrl: "https://github.com/Mahathirrr/ml-pipeline",
       status: "In Progress"
     }
   ];
@@ -141,7 +141,7 @@ const References = () => {
             {filteredProjects.map((project, index) => (
               <div 
                 key={project.id}
-                className="glassmorphism overflow-hidden animate-fade-in"
+                className="glassmorphism overflow-hidden animate-fade-in hover:scale-105 transition-transform duration-300"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="relative h-48 overflow-hidden">

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Mail, Github, Linkedin } from 'lucide-react';
+import { Mail, Github, Linkedin, Code } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -11,12 +11,8 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 relative">
-                <img 
-                  src="/lovable-uploads/8acfad30-aa90-4edd-b779-aafd43058584.png" 
-                  alt="Muhammad Mahathir Logo" 
-                  className="h-full w-full object-contain" 
-                />
+              <div className="bg-gradient-to-r from-green-400 to-green-600 p-2 rounded-lg">
+                <Code className="h-6 w-6 text-white" />
               </div>
               <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-500">
                 Muhammad Mahathir
@@ -69,14 +65,12 @@ const Footer = () => {
                 </NavLink>
               </li>
               <li>
-                <a 
-                  href="https://github.com/Mahathirrr" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <NavLink 
+                  to="/references" 
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   Projects
-                </a>
+                </NavLink>
               </li>
               <li>
                 <NavLink 
