@@ -84,6 +84,25 @@ const References = () => {
     ? projects 
     : projects.filter(project => project.category === selectedCategory);
 
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "Frontend":
+        return "bg-blue-500/90 text-white";
+      case "Backend":
+        return "bg-purple-500/90 text-white";
+      case "Data Science":
+        return "bg-orange-500/90 text-white";
+      default:
+        return "bg-green-500/90 text-white";
+    }
+  };
+
+  const getStatusColor = (status: string) => {
+    return status === 'Completed' 
+      ? 'bg-green-500/90 text-white' 
+      : 'bg-yellow-500/90 text-white';
+  };
+
   return (
     <div className="pt-20">
       {/* Hero Section */}
@@ -99,16 +118,6 @@ const References = () => {
               A showcase of my work in modern web development, scalable backend systems, and data science solutions. 
               Each project demonstrates expertise in creating efficient, maintainable software.
             </p>
-            <a
-              href="https://github.com/Mahathirrr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow animate-fade-in animation-delay-200"
-            >
-              <Github className="mr-2 h-5 w-5" />
-              View All on GitHub
-              <ExternalLink className="ml-2 h-4 w-4" />
-            </a>
           </div>
         </div>
       </section>
@@ -150,19 +159,15 @@ const References = () => {
                     alt={project.title}
                     className="object-cover h-full w-full transition-transform duration-500 hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                   <div className="absolute top-4 left-4 z-10">
-                    <div className="bg-green-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium flex items-center shadow-lg">
+                    <div className={`backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium flex items-center shadow-lg ${getCategoryColor(project.category)}`}>
                       {project.icon}
                       <span className="ml-2">{project.category}</span>
                     </div>
                   </div>
                   <div className="absolute top-4 right-4 z-10">
-                    <div className={`px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm shadow-lg ${
-                      project.status === 'Completed' 
-                        ? 'bg-green-500/90 text-white' 
-                        : 'bg-yellow-500/90 text-white'
-                    }`}>
+                    <div className={`px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm shadow-lg ${getStatusColor(project.status)}`}>
                       {project.status}
                     </div>
                   </div>
@@ -203,13 +208,12 @@ const References = () => {
         </div>
       </section>
 
-      {/* GitHub CTA */}
+      {/* Single GitHub CTA - strategically placed */}
       <section className="py-20 px-6 md:px-12 bg-psyco-black-light">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Want to See More?</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">Explore More Projects</h2>
           <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Check out my GitHub profile for more projects, contributions, and code samples. 
-            I'm always working on something new!
+            Visit my GitHub profile to see additional projects, code contributions, and open source work.
           </p>
           <a
             href="https://github.com/Mahathirrr"
@@ -218,7 +222,7 @@ const References = () => {
             className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-medium py-4 px-8 rounded-lg transition-all duration-300 btn-glow"
           >
             <Github className="mr-2 h-5 w-5" />
-            Visit My GitHub
+            Visit GitHub Profile
             <ExternalLink className="ml-2 h-4 w-4" />
           </a>
         </div>
