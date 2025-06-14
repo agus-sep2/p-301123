@@ -8,32 +8,23 @@ import { supabase } from '@/integrations/supabase/client';
 
 const Index = () => {
   const [services, setServices] = useState([]);
-  const [personalInfo, setPersonalInfo] = useState(null);
 
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchData();
+    fetchServices();
   }, []);
 
-  const fetchData = async () => {
+  const fetchServices = async () => {
     try {
-      // Fetch services
       const { data: servicesData } = await supabase
         .from('services')
         .select('*')
         .limit(3);
       
-      // Fetch personal info
-      const { data: personalData } = await supabase
-        .from('personal_info')
-        .select('*')
-        .single();
-      
       if (servicesData) setServices(servicesData);
-      if (personalData) setPersonalInfo(personalData);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching services:', error);
     }
   };
 
@@ -142,54 +133,13 @@ const Index = () => {
           </div>
           
           <div className="mt-12 text-center">
-            <a
-              href={personalInfo?.github_url || "https://github.com/Mahathirrr"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow mr-4"
-            >
-              View Projects
-              <MoveRight className="ml-2 h-5 w-5" />
-            </a>
             <Link
               to="/booking"
-              className="inline-flex items-center bg-transparent border border-green-500 text-green-500 hover:bg-green-500/10 font-medium py-3 px-8 rounded-lg transition-all duration-300"
+              className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 btn-glow"
             >
               Get In Touch
+              <MoveRight className="ml-2 h-5 w-5" />
             </Link>
-          </div>
-        </div>
-      </section>
-      
-      {/* CTA Section */}
-      <section className="py-20 px-6 md:px-12 bg-psyco-black-light relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute w-96 h-96 bg-green-500/10 rounded-full blur-3xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start a Project?</h2>
-            <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-              Let's work together to bring your ideas to life using modern web technologies, efficient backend systems, and data-driven solutions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/booking"
-                className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center btn-glow"
-              >
-                Contact Me
-                <MoveRight className="ml-2 h-5 w-5" />
-              </Link>
-              <a
-                href={personalInfo?.github_url || "https://github.com/Mahathirrr"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-transparent border border-green-500 text-green-500 hover:bg-green-500/10 font-medium py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center"
-              >
-                View GitHub
-              </a>
-            </div>
           </div>
         </div>
       </section>
