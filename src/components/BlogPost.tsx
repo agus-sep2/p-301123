@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import ImageSkeleton from '@/components/ui/image-skeleton';
 
 interface BlogPostProps {
   id: string;
@@ -43,10 +44,11 @@ const BlogPost = ({
       <Link to={`/blog/${id}`}>
         <div className="relative h-52 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-psyco-black-DEFAULT to-transparent z-10"></div>
-          <img 
-            src={imageSrc} 
-            alt={title} 
+          <ImageSkeleton
+            src={imageSrc}
+            alt={title}
             className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+            containerClassName="w-full h-full"
           />
           <div className="absolute top-4 left-4 z-20">
             <span className="bg-psyco-green-DEFAULT px-3 py-1 text-xs font-medium text-white rounded-full">

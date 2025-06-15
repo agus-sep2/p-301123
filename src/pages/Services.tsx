@@ -1,13 +1,15 @@
-
 import React, { useEffect, useState } from "react";
 import { Code, Database, BarChart3, Server, Globe, MoveRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Service, PersonalInfo } from "@/types/database";
+import Loading from "@/components/ui/loading";
+import ImageSkeleton from "@/components/ui/image-skeleton";
 
 const Services = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo | null>(null);
+  const [loading, setLoading] = useState(true);
 
   // Scroll to top on page load
   useEffect(() => {
@@ -17,6 +19,7 @@ const Services = () => {
 
   const fetchData = async () => {
     try {
+      setLoading(true);
       const [servicesResult, personalResult] = await Promise.all([
         supabase.from('services').select('*').order('created_at'),
         supabase.from('personal_info').select('*').single()
@@ -26,6 +29,8 @@ const Services = () => {
       if (personalResult.data) setPersonalInfo(personalResult.data);
     } catch (error) {
       console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,6 +64,14 @@ const Services = () => {
       description: "Efficient database architecture and optimization."
     }
   ];
+
+  if (loading) {
+    return (
+      <div className="pt-20 min-h-screen flex items-center justify-center">
+        <Loading size="lg" text="Loading services..." />
+      </div>
+    );
+  }
 
   return (
     <div className="pt-20">
@@ -110,10 +123,11 @@ const Services = () => {
               <div className="w-full lg:w-1/2">
                 <div className="glassmorphism p-1 rounded-2xl h-full">
                   <div className="relative w-full h-full overflow-hidden rounded-xl">
-                    <img 
-                      src={service.image_url || "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80"} 
-                      alt={service.title} 
+                    <ImageSkeleton
+                      src={service.image_url || "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80"}
+                      alt={service.title}
                       className="object-cover w-full h-full aspect-video lg:aspect-auto transition-transform duration-10000 hover:scale-110"
+                      containerClassName="w-full h-full"
                     />
                   </div>
                 </div>

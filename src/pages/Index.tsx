@@ -1,14 +1,15 @@
-
 import React, { useEffect, useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ServiceCard from "@/components/ServiceCard";
+import CardSkeleton from "@/components/ui/card-skeleton";
 import { Link } from "react-router-dom";
 import { Code, Database, BarChart3, MoveRight } from "lucide-react";
 import { supabase } from '@/integrations/supabase/client';
 
 const Index = () => {
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Scroll to top on page load
   useEffect(() => {
@@ -18,6 +19,7 @@ const Index = () => {
 
   const fetchServices = async () => {
     try {
+      setLoading(true);
       const { data: servicesData } = await supabase
         .from('services')
         .select('*')
@@ -26,6 +28,8 @@ const Index = () => {
       if (servicesData) setServices(servicesData);
     } catch (error) {
       console.error('Error fetching services:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -95,14 +99,26 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredServices.map((service, index) => (
-              <ServiceCard
-                key={index}
-                {...service}
-                className="animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              />
-            ))}
+            {loading ? (
+              // Show skeleton loading cards
+              Array.from({ length: 3 }).map((_, index) => (
+                <CardSkeleton
+                  key={index}
+                  className="animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                />
+              ))
+            ) : (
+              // Show actual service cards
+              featuredServices.map((service, index) => (
+                <ServiceCard
+                  key={index}
+                  {...service}
+                  className="animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                />
+              ))
+            )}
           </div>
         </div>
       </section>

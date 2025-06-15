@@ -2,6 +2,7 @@
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import ImageSkeleton from '@/components/ui/image-skeleton';
 
 interface TestimonialCardProps {
   name: string;
@@ -38,10 +39,11 @@ const TestimonialCard = ({
       
       <div className="flex flex-col sm:flex-row gap-4 mb-4 items-start sm:items-center">
         <div className="h-16 w-16 rounded-full overflow-hidden border-2 border-psyco-green-muted flex-shrink-0">
-          <img 
-            src={imageSrc} 
-            alt={name} 
+          <ImageSkeleton
+            src={imageSrc}
+            alt={name}
             className="w-full h-full object-cover"
+            containerClassName="w-full h-full"
           />
         </div>
         

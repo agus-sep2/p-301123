@@ -3,6 +3,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ImageSkeleton from '@/components/ui/image-skeleton';
 
 interface ServiceCardProps {
   title: string;
@@ -33,10 +34,11 @@ const ServiceCard = ({
     >
       <div className="relative h-48 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-psyco-black-DEFAULT to-transparent z-10"></div>
-        <img 
-          src={imageSrc} 
-          alt={title} 
+        <ImageSkeleton
+          src={imageSrc}
+          alt={title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          containerClassName="w-full h-full"
         />
         <div className="absolute top-4 left-4 z-20 bg-psyco-black-card p-2 rounded-lg">
           <div className="text-psyco-green-DEFAULT">
