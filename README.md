@@ -1,69 +1,122 @@
-# Welcome to your Lovable project
 
-## Project info
+# Muhammad Mahathir - Portfolio Website
 
-**URL**: https://lovable.dev/projects/4895dbd0-4609-4ca0-9728-8cee578eee22
+A modern, responsive portfolio website showcasing my expertise as a Full Stack Developer and Data Scientist.
 
-## How can I edit this code?
+## About
 
-There are several ways of editing your application.
+This portfolio website highlights my professional journey, skills, and projects in:
+- Frontend Development (React, Vue.js, TypeScript)
+- Backend Development (Golang, Node.js, APIs)
+- Data Science (Machine Learning, Analytics, Insights)
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4895dbd0-4609-4ca0-9728-8cee578eee22) and start prompting.
+- **Responsive Design**: Optimized for all device sizes
+- **Modern UI/UX**: Clean, professional interface with smooth animations
+- **Dynamic Content**: Admin panel for easy content management
+- **Blog System**: Share insights and technical articles
+- **Project Showcase**: Detailed project presentations
+- **Booking System**: Integrated calendar for consultations
+- **Contact Forms**: Easy communication channels
 
-Changes made via Lovable will be committed automatically to this repo.
+## Technologies Used
 
-**Use your preferred IDE**
+- **Frontend**: React 18, TypeScript, Tailwind CSS
+- **UI Components**: Shadcn/ui, Radix UI
+- **Backend**: Supabase (Database, Auth, Storage)
+- **State Management**: TanStack Query
+- **Routing**: React Router
+- **Build Tool**: Vite
+- **Icons**: Lucide React
+- **Charts**: Recharts
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Prerequisites
 
-Follow these steps:
+- Node.js (v18 or higher)
+- npm or yarn package manager
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Installation
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd portfolio-website
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+2. Install dependencies:
+```bash
+npm install
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
+Add your Supabase credentials to the `.env.local` file.
+
+4. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+5. Open [http://localhost:5173](http://localhost:5173) to view the website.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Project Structure
 
-**Use GitHub Codespaces**
+```
+src/
+├── components/          # Reusable UI components
+├── pages/              # Page components
+├── hooks/              # Custom React hooks
+├── lib/                # Utility functions
+├── integrations/       # External service integrations
+├── types/              # TypeScript type definitions
+└── styles/             # Global styles and Tailwind config
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Building for Production
 
-## What technologies are used for this project?
+```bash
+npm run build
+```
 
-This project is built with .
+The built files will be in the `dist` directory, ready for deployment.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Deployment
 
-## How can I deploy this project?
+This project can be deployed to any static hosting service:
+- Vercel
+- Netlify
+- GitHub Pages
+- AWS S3 + CloudFront
 
-Simply open [Lovable](https://lovable.dev/projects/4895dbd0-4609-4ca0-9728-8cee578eee22) and click on Share -> Publish.
+## Features Overview
 
-## I want to use a custom domain - is that possible?
+### Admin Panel
+- Content management system
+- Project portfolio management
+- Blog post creation and editing
+- Service offerings management
+- Experience and education tracking
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+### Public Features
+- Professional portfolio showcase
+- Interactive project galleries
+- Technical blog with search
+- Contact and booking system
+- Responsive design across all devices
+
+## Contact
+
+**Muhammad Mahathir**
+- Full Stack Developer & Data Scientist
+- Specializing in Vue.js, Golang, and Machine Learning
+
+For inquiries about collaboration or consultation, please use the contact form on the website.
+
+## License
+
+This project is private and proprietary. All rights reserved.
