@@ -1,4 +1,3 @@
-
 export interface PersonalInfo {
   id: string;
   name: string;
@@ -33,6 +32,7 @@ export interface Project {
   technologies: string[];
   github_url?: string;
   demo_url?: string;
+  award?: string;
   created_at: string;
   updated_at: string;
 }
