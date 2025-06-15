@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
 import ServiceCard from "@/components/ServiceCard";
 import { Link } from "react-router-dom";
 import { Code, Database, BarChart3, MoveRight } from "lucide-react";
@@ -70,6 +71,9 @@ const Index = () => {
   return (
     <div>
       <HeroSection />
+      
+      {/* About Section */}
+      <AboutSection />
       
       {/* Services Section */}
       <section className="py-20 px-6 md:px-12">
