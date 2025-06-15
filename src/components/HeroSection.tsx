@@ -27,14 +27,14 @@ const HeroSection = () => {
 
   if (!personalInfo) {
     return (
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden pt-28">
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden pt-28 pb-20">
         <div className="text-center text-white">Loading...</div>
       </section>
     );
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden pt-28">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden pt-32 pb-20">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-96 h-96 bg-green-500/10 rounded-full blur-3xl top-1/4 left-1/4 animate-pulse"></div>
@@ -56,7 +56,7 @@ const HeroSection = () => {
             {personalInfo.description}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 animate-fade-in animation-delay-600">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-fade-in animation-delay-600">
             <Link
               to="/booking"
               className="bg-green-500 hover:bg-green-600 text-white font-medium py-4 px-8 rounded-lg transition-all duration-300 flex items-center btn-glow"
@@ -73,7 +73,7 @@ const HeroSection = () => {
             </Link>
           </div>
           
-          <div className="flex justify-center space-x-8 animate-fade-in animation-delay-800">
+          <div className="flex justify-center space-x-8 animate-fade-in animation-delay-800 mb-12">
             {personalInfo.github_url && (
               <a 
                 href={personalInfo.github_url}
