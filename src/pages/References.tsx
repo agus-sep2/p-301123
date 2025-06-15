@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { ExternalLink, Github, Code, Database, BarChart3, Award, Globe, Cpu, Monitor, Server } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +8,7 @@ const References = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   // Scroll to top on page load
   useEffect(() => {
@@ -18,15 +18,26 @@ const References = () => {
 
   const fetchData = async () => {
     try {
+      setLoading(true);
+      console.log('Fetching projects data...');
+      
       const [projectsResult, personalResult] = await Promise.all([
-        supabase.from('projects').select('*').order('created_at'),
+        supabase.from('projects').select('*').order('created_at', { ascending: false }),
         supabase.from('personal_info').select('*').single()
       ]);
 
-      if (projectsResult.data) setProjects(projectsResult.data);
+      console.log('Projects result:', projectsResult);
+      console.log('Personal info result:', personalResult);
+
+      if (projectsResult.data) {
+        setProjects(projectsResult.data);
+        console.log('Projects loaded:', projectsResult.data.length);
+      }
       if (personalResult.data) setPersonalInfo(personalResult.data);
     } catch (error) {
       console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -149,6 +160,14 @@ const References = () => {
     }
     return project.category ? [project.category] : [];
   };
+
+  if (loading) {
+    return (
+      <div className="pt-20 min-h-screen flex items-center justify-center">
+        <div className="text-white text-lg">Loading projects...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-20">

@@ -60,15 +60,24 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
   }> = ({ data, onChange, onSave, onCancel }) => {
     const [technologiesText, setTechnologiesText] = useState(data.technologies?.join('\n') || '');
     const [categoriesText, setCategoriesText] = useState(data.categories?.join('\n') || '');
+    const [useMultipleCategories, setUseMultipleCategories] = useState(
+      data.categories && data.categories.length > 0
+    );
 
     const handleSave = () => {
       const technologies = technologiesText.split('\n').filter(t => t.trim());
       const categories = categoriesText.split('\n').filter(c => c.trim());
-      onChange({ 
+      
+      const updatedData = { 
         ...data, 
         technologies: technologies.length > 0 ? technologies : [],
-        categories: categories.length > 0 ? categories : []
-      });
+        // Clear category field if using multiple categories
+        category: useMultipleCategories ? undefined : data.category,
+        // Clear categories array if using single category
+        categories: useMultipleCategories ? (categories.length > 0 ? categories : []) : []
+      };
+      
+      onChange(updatedData);
       onSave();
     };
 
@@ -83,20 +92,6 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
               className="bg-black/50 border-green-500/20 text-white"
               placeholder="Project Title"
             />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Single Category (Legacy - Optional)</label>
-            <Select value={data.category || 'none'} onValueChange={(value) => onChange({ ...data, category: value === 'none' ? undefined : value })}>
-              <SelectTrigger className="bg-black/50 border-green-500/20 text-white">
-                <SelectValue placeholder="Select category (optional)" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">No Category</SelectItem>
-                {availableCategories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">Status (Optional)</label>
@@ -156,46 +151,88 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
             placeholder="Describe your project..."
           />
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Categories (one per line) - Optional
-              <span className="text-xs text-gray-400 block">Select from available categories or type custom ones</span>
+
+        {/* Category Selection Mode Toggle */}
+        <div className="border border-green-500/20 rounded-lg p-4 bg-black/30">
+          <div className="flex items-center gap-4 mb-4">
+            <label className="flex items-center gap-2">
+              <input
+                type="radio"
+                name="categoryMode"
+                checked={!useMultipleCategories}
+                onChange={() => setUseMultipleCategories(false)}
+                className="text-green-500"
+              />
+              <span className="text-gray-300">Single Category</span>
             </label>
-            <Textarea
-              value={categoriesText}
-              onChange={(e) => setCategoriesText(e.target.value)}
-              className="bg-black/50 border-green-500/20 text-white min-h-[120px]"
-              placeholder="Full Stack&#10;Machine Learning&#10;Web Development&#10;Backend"
-            />
-            <div className="mt-2 flex flex-wrap gap-1 max-h-32 overflow-y-auto">
-              {availableCategories.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => {
-                    const currentCategories = categoriesText.split('\n').filter(c => c.trim());
-                    if (!currentCategories.includes(cat)) {
-                      setCategoriesText(currentCategories.concat(cat).join('\n'));
-                    }
-                  }}
-                  className="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded hover:bg-green-500/30"
-                >
-                  + {cat}
-                </button>
-              ))}
+            <label className="flex items-center gap-2">
+              <input
+                type="radio"
+                name="categoryMode"
+                checked={useMultipleCategories}
+                onChange={() => setUseMultipleCategories(true)}
+                className="text-green-500"
+              />
+              <span className="text-gray-300">Multiple Categories</span>
+            </label>
+          </div>
+
+          {!useMultipleCategories ? (
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Category (Optional)</label>
+              <Select value={data.category || 'none'} onValueChange={(value) => onChange({ ...data, category: value === 'none' ? undefined : value })}>
+                <SelectTrigger className="bg-black/50 border-green-500/20 text-white">
+                  <SelectValue placeholder="Select category (optional)" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">No Category</SelectItem>
+                  {availableCategories.map((cat) => (
+                    <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Technologies (one per line) - Optional</label>
-            <Textarea
-              value={technologiesText}
-              onChange={(e) => setTechnologiesText(e.target.value)}
-              className="bg-black/50 border-green-500/20 text-white min-h-[120px]"
-              placeholder="React&#10;TypeScript&#10;Node.js&#10;PostgreSQL"
-            />
-          </div>
+          ) : (
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Categories (one per line) - Optional
+                <span className="text-xs text-gray-400 block">Select from available categories or type custom ones</span>
+              </label>
+              <Textarea
+                value={categoriesText}
+                onChange={(e) => setCategoriesText(e.target.value)}
+                className="bg-black/50 border-green-500/20 text-white min-h-[120px]"
+                placeholder="Full Stack&#10;Machine Learning&#10;Web Development&#10;Backend"
+              />
+              <div className="mt-2 flex flex-wrap gap-1 max-h-32 overflow-y-auto">
+                {availableCategories.map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => {
+                      const currentCategories = categoriesText.split('\n').filter(c => c.trim());
+                      if (!currentCategories.includes(cat)) {
+                        setCategoriesText(currentCategories.concat(cat).join('\n'));
+                      }
+                    }}
+                    className="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded hover:bg-green-500/30"
+                  >
+                    + {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">Technologies (one per line) - Optional</label>
+          <Textarea
+            value={technologiesText}
+            onChange={(e) => setTechnologiesText(e.target.value)}
+            className="bg-black/50 border-green-500/20 text-white min-h-[120px]"
+            placeholder="React&#10;TypeScript&#10;Node.js&#10;PostgreSQL"
+          />
         </div>
         
         <div className="flex gap-2">
