@@ -125,7 +125,7 @@ const Footer = () => {
             </h3>
             <ul className="space-y-4">
               <li className="flex items-center space-x-3 text-gray-300">
-                <Mail size={16} className="text-green-500" />
+                <Mail size={16} className="text-green-500 flex-shrink-0" />
                 <a 
                   href={`mailto:${personalInfo.email}`}
                   className="hover:text-green-400 transition-colors"
@@ -135,7 +135,7 @@ const Footer = () => {
               </li>
               {personalInfo.github_url && (
                 <li className="flex items-center space-x-3 text-gray-300">
-                  <Github size={16} className="text-green-500" />
+                  <Github size={16} className="text-green-500 flex-shrink-0" />
                   <a 
                     href={personalInfo.github_url} 
                     target="_blank" 
@@ -148,7 +148,7 @@ const Footer = () => {
               )}
               {personalInfo.linkedin_url && (
                 <li className="flex items-center space-x-3 text-gray-300">
-                  <Linkedin size={16} className="text-green-500" />
+                  <Linkedin size={16} className="text-green-500 flex-shrink-0" />
                   <a 
                     href={personalInfo.linkedin_url} 
                     target="_blank" 
