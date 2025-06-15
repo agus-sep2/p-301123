@@ -9,6 +9,51 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      education: {
+        Row: {
+          activities: string | null
+          created_at: string
+          degree: string
+          description: string | null
+          end_date: string | null
+          field_of_study: string | null
+          grade: string | null
+          id: string
+          institution: string
+          is_current: boolean | null
+          start_date: string
+          updated_at: string
+        }
+        Insert: {
+          activities?: string | null
+          created_at?: string
+          degree: string
+          description?: string | null
+          end_date?: string | null
+          field_of_study?: string | null
+          grade?: string | null
+          id?: string
+          institution: string
+          is_current?: boolean | null
+          start_date: string
+          updated_at?: string
+        }
+        Update: {
+          activities?: string | null
+          created_at?: string
+          degree?: string
+          description?: string | null
+          end_date?: string | null
+          field_of_study?: string | null
+          grade?: string | null
+          id?: string
+          institution?: string
+          is_current?: boolean | null
+          start_date?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       experiences: {
         Row: {
           company: string
@@ -188,6 +233,33 @@ export type Database = {
           id?: string
           image_url?: string | null
           title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          setting_key: string
+          setting_value: boolean
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          setting_key: string
+          setting_value?: boolean
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          setting_key?: string
+          setting_value?: boolean
           updated_at?: string
         }
         Relationships: []

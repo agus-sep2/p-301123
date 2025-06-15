@@ -52,6 +52,30 @@ export interface Experience {
   updated_at: string;
 }
 
+export interface Education {
+  id: string;
+  institution: string;
+  degree: string;
+  field_of_study?: string;
+  start_date: string;
+  end_date?: string;
+  is_current?: boolean;
+  grade?: string;
+  activities?: string;
+  description?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SiteSetting {
+  id: string;
+  setting_key: string;
+  setting_value: boolean;
+  description?: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Profile {
   id: string;
   email: string;
