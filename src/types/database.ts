@@ -1,3 +1,4 @@
+
 export interface PersonalInfo {
   id: string;
   name: string;
@@ -27,8 +28,9 @@ export interface Project {
   title: string;
   description: string;
   image_url?: string;
-  category: string;
-  status: string;
+  category?: string;
+  status?: string;
+  categories?: string[];
   technologies: string[];
   github_url?: string;
   demo_url?: string;

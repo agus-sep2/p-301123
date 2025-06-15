@@ -4,6 +4,7 @@ import { Project } from '@/types/database';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
 import FileUpload from './FileUpload';
 
@@ -13,6 +14,31 @@ interface ProjectsManagerProps {
   onUpdate: (id: string, data: Partial<Project>) => void;
   onDelete: (id: string) => void;
 }
+
+const availableCategories = [
+  'Full Stack',
+  'Web Development', 
+  'Backend',
+  'Frontend',
+  'Machine Learning',
+  'AI',
+  'Mobile Development',
+  'DevOps',
+  'Cloud',
+  'Desktop',
+  'API Development',
+  'Database Design',
+  'Automation'
+];
+
+const availableStatuses = [
+  'Completed',
+  'In Progress',
+  'On Hold',
+  'Planning',
+  'Deployed',
+  'Prototype'
+];
 
 const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, onUpdate, onDelete }) => {
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -33,7 +59,7 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
       const categories = categoriesText.split('\n').filter(c => c.trim());
       onChange({ 
         ...data, 
-        technologies,
+        technologies: technologies.length > 0 ? technologies : [],
         categories: categories.length > 0 ? categories : undefined
       });
       onSave();
@@ -43,53 +69,66 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Title</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Title *</label>
             <Input
               value={data.title || ''}
               onChange={(e) => onChange({ ...data, title: e.target.value })}
               className="bg-black/50 border-green-500/20 text-white"
+              placeholder="Project Title"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Single Category (Legacy)</label>
-            <Input
-              value={data.category || ''}
-              onChange={(e) => onChange({ ...data, category: e.target.value })}
-              placeholder="Optional - for backward compatibility"
-              className="bg-black/50 border-green-500/20 text-white"
-            />
+            <label className="block text-sm font-medium text-gray-300 mb-2">Single Category (Legacy - Optional)</label>
+            <Select value={data.category || ''} onValueChange={(value) => onChange({ ...data, category: value || undefined })}>
+              <SelectTrigger className="bg-black/50 border-green-500/20 text-white">
+                <SelectValue placeholder="Select category (optional)" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">No Category</SelectItem>
+                {availableCategories.map((cat) => (
+                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">Status (Optional)</label>
+            <Select value={data.status || ''} onValueChange={(value) => onChange({ ...data, status: value || undefined })}>
+              <SelectTrigger className="bg-black/50 border-green-500/20 text-white">
+                <SelectValue placeholder="Select status (optional)" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">No Status</SelectItem>
+                {availableStatuses.map((status) => (
+                  <SelectItem key={status} value={status}>{status}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Award/Recognition (Optional)</label>
             <Input
-              value={data.status || ''}
-              onChange={(e) => onChange({ ...data, status: e.target.value })}
-              placeholder="e.g., Completed, In Progress, or leave empty"
+              value={data.award || ''}
+              onChange={(e) => onChange({ ...data, award: e.target.value || undefined })}
+              placeholder="e.g., 1st Place, Finalist, Best Innovation Award (optional)"
               className="bg-black/50 border-green-500/20 text-white"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Award/Recognition</label>
-            <Input
-              value={(data as any).award || ''}
-              onChange={(e) => onChange({ ...data, award: e.target.value })}
-              placeholder="e.g., 1st Place Innovation Contest, Best Project Award"
-              className="bg-black/50 border-green-500/20 text-white"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">GitHub URL</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">GitHub URL (Optional)</label>
             <Input
               value={data.github_url || ''}
-              onChange={(e) => onChange({ ...data, github_url: e.target.value })}
+              onChange={(e) => onChange({ ...data, github_url: e.target.value || undefined })}
+              placeholder="https://github.com/username/repo (optional)"
               className="bg-black/50 border-green-500/20 text-white"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Demo URL</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Demo URL (Optional)</label>
             <Input
               value={data.demo_url || ''}
-              onChange={(e) => onChange({ ...data, demo_url: e.target.value })}
+              onChange={(e) => onChange({ ...data, demo_url: e.target.value || undefined })}
+              placeholder="https://demo.example.com (optional)"
               className="bg-black/50 border-green-500/20 text-white"
             />
           </div>
@@ -98,33 +137,51 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
         <FileUpload
           currentImageUrl={data.image_url || undefined}
           onImageChange={(imageUrl) => onChange({ ...data, image_url: imageUrl || undefined })}
-          label="Project Image"
+          label="Project Image (Optional)"
         />
         
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">Description</label>
+          <label className="block text-sm font-medium text-gray-300 mb-2">Description *</label>
           <Textarea
             value={data.description || ''}
             onChange={(e) => onChange({ ...data, description: e.target.value })}
             className="bg-black/50 border-green-500/20 text-white"
+            placeholder="Describe your project..."
           />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">
-              Categories (one per line)
-              <span className="text-xs text-gray-400 block">e.g., Full Stack, Machine Learning, Web Development</span>
+              Categories (one per line) - Optional
+              <span className="text-xs text-gray-400 block">Select from available categories or type custom ones</span>
             </label>
             <Textarea
               value={categoriesText}
               onChange={(e) => setCategoriesText(e.target.value)}
               className="bg-black/50 border-green-500/20 text-white min-h-[120px]"
-              placeholder="Full Stack&#10;Web Development&#10;Backend&#10;Frontend"
+              placeholder="Full Stack&#10;Machine Learning&#10;Web Development&#10;Backend"
             />
+            <div className="mt-2 flex flex-wrap gap-1">
+              {availableCategories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => {
+                    const currentCategories = categoriesText.split('\n').filter(c => c.trim());
+                    if (!currentCategories.includes(cat)) {
+                      setCategoriesText(currentCategories.concat(cat).join('\n'));
+                    }
+                  }}
+                  className="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded hover:bg-green-500/30"
+                >
+                  + {cat}
+                </button>
+              ))}
+            </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Technologies (one per line)</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Technologies (one per line) - Optional</label>
             <Textarea
               value={technologiesText}
               onChange={(e) => setTechnologiesText(e.target.value)}
@@ -228,8 +285,8 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
                       </div>
                       
                       {/* Award if exists */}
-                      {(project as any).award && (
-                        <p className="text-yellow-400 text-sm">🏆 {(project as any).award}</p>
+                      {project.award && (
+                        <p className="text-yellow-400 text-sm">🏆 {project.award}</p>
                       )}
                     </div>
                   </div>

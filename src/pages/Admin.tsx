@@ -170,18 +170,24 @@ const AdminContent = () => {
 
   const createProject = async (data: Partial<Project>) => {
     try {
+      const projectData: any = {
+        title: data.title || '',
+        description: data.description || '',
+        technologies: data.technologies || []
+      };
+
+      // Only include optional fields if they have values
+      if (data.image_url) projectData.image_url = data.image_url;
+      if (data.category) projectData.category = data.category;
+      if (data.status) projectData.status = data.status;
+      if (data.categories && data.categories.length > 0) projectData.categories = data.categories;
+      if (data.github_url) projectData.github_url = data.github_url;
+      if (data.demo_url) projectData.demo_url = data.demo_url;
+      if (data.award) projectData.award = data.award;
+
       const { data: newProjectData, error } = await supabase
         .from('projects')
-        .insert([{
-          title: data.title || '',
-          description: data.description || '',
-          image_url: data.image_url || '',
-          category: data.category || '',
-          status: data.status || 'Completed',
-          technologies: data.technologies || [],
-          github_url: data.github_url || '',
-          demo_url: data.demo_url || ''
-        }])
+        .insert([projectData])
         .select()
         .single();
 
@@ -204,9 +210,23 @@ const AdminContent = () => {
 
   const updateProject = async (id: string, data: Partial<Project>) => {
     try {
+      const updateData: any = {};
+      
+      // Only include fields that are provided
+      if (data.title !== undefined) updateData.title = data.title;
+      if (data.description !== undefined) updateData.description = data.description;
+      if (data.technologies !== undefined) updateData.technologies = data.technologies;
+      if (data.image_url !== undefined) updateData.image_url = data.image_url;
+      if (data.category !== undefined) updateData.category = data.category;
+      if (data.status !== undefined) updateData.status = data.status;
+      if (data.categories !== undefined) updateData.categories = data.categories;
+      if (data.github_url !== undefined) updateData.github_url = data.github_url;
+      if (data.demo_url !== undefined) updateData.demo_url = data.demo_url;
+      if (data.award !== undefined) updateData.award = data.award;
+
       const { error } = await supabase
         .from('projects')
-        .update(data)
+        .update(updateData)
         .eq('id', id);
 
       if (error) throw error;

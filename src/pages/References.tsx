@@ -56,8 +56,8 @@ const References = () => {
                project.category === selectedCategory;
       });
 
-  // Separate award-winning projects from regular projects
-  const awardProjects = filteredProjects.filter(project => project.award);
+  // Separate featured projects (with awards) from regular projects
+  const featuredProjects = filteredProjects.filter(project => project.award);
   const regularProjects = filteredProjects.filter(project => !project.award);
 
   const getCategoryColor = (category: string) => {
@@ -80,15 +80,31 @@ const References = () => {
         return "bg-cyan-500 text-white";
       case "Desktop":
         return "bg-gray-500 text-white";
+      case "Database Design":
+        return "bg-indigo-500 text-white";
+      case "Automation":
+        return "bg-yellow-500 text-black";
       default:
         return "bg-slate-500 text-white";
     }
   };
 
   const getStatusColor = (status: string) => {
-    return status === 'Completed' 
-      ? 'bg-green-500/90 text-white' 
-      : 'bg-yellow-500/90 text-white';
+    switch (status) {
+      case 'Completed':
+      case 'Deployed':
+        return 'bg-green-500/90 text-white';
+      case 'In Progress':
+        return 'bg-yellow-500/90 text-white';
+      case 'On Hold':
+        return 'bg-red-500/90 text-white';
+      case 'Planning':
+        return 'bg-blue-500/90 text-white';
+      case 'Prototype':
+        return 'bg-purple-500/90 text-white';
+      default:
+        return 'bg-gray-500/90 text-white';
+    }
   };
 
   const getIconComponent = (category: string) => {
@@ -109,6 +125,10 @@ const References = () => {
       case "DevOps":
       case "Cloud":
         return <Database size={20} />;
+      case "Database Design":
+        return <Database size={20} />;
+      case "Automation":
+        return <BarChart3 size={20} />;
       default:
         return <Code size={20} />;
     }
@@ -173,16 +193,15 @@ const References = () => {
       {/* Projects Section */}
       <section className="py-16 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
-          {/* Award-Winning Projects - Featured Section */}
-          {awardProjects.length > 0 && (
+          {/* Featured Projects - Projects with Awards/Recognition */}
+          {featuredProjects.length > 0 && (
             <div className="mb-16">
               <h2 className="text-3xl font-bold text-white mb-12 text-center flex items-center justify-center gap-3">
                 <Award size={32} className="text-yellow-400" />
-                Award-Winning Projects
+                Featured Projects
               </h2>
               <div className="space-y-12">
-                {awardProjects.map((project, index) => {
-                  const primaryCategory = getPrimaryCategory(project);
+                {featuredProjects.map((project, index) => {
                   const allCategories = getProjectCategories(project);
                   
                   return (
@@ -195,7 +214,7 @@ const References = () => {
                       <div className="absolute top-6 left-6 z-30">
                         <div className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 text-black font-bold px-6 py-3 rounded-full text-lg flex items-center gap-3 shadow-2xl animate-pulse-glow">
                           <Award size={24} />
-                          <span>Award Winner</span>
+                          <span>Featured</span>
                         </div>
                       </div>
 
@@ -239,19 +258,21 @@ const References = () => {
                           
                           <p className="text-gray-300 mb-8 text-lg leading-relaxed">{project.description}</p>
                           
-                          <div className="mb-8">
-                            <h4 className="text-lg font-semibold text-white mb-4">Technologies Used:</h4>
-                            <div className="flex flex-wrap gap-3">
-                              {project.technologies?.map((tech, idx) => (
-                                <span 
-                                  key={idx}
-                                  className="bg-green-500/20 text-green-400 px-4 py-2 rounded-lg text-sm font-medium border border-green-500/30 backdrop-blur-sm"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
+                          {project.technologies && project.technologies.length > 0 && (
+                            <div className="mb-8">
+                              <h4 className="text-lg font-semibold text-white mb-4">Technologies Used:</h4>
+                              <div className="flex flex-wrap gap-3">
+                                {project.technologies.map((tech, idx) => (
+                                  <span 
+                                    key={idx}
+                                    className="bg-green-500/20 text-green-400 px-4 py-2 rounded-lg text-sm font-medium border border-green-500/30 backdrop-blur-sm"
+                                  >
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
-                          </div>
+                          )}
                           
                           <div className="flex gap-6">
                             {project.github_url && (
@@ -290,19 +311,18 @@ const References = () => {
           {/* Regular Projects Grid */}
           {regularProjects.length > 0 && (
             <div>
-              {awardProjects.length > 0 && (
+              {featuredProjects.length > 0 && (
                 <h2 className="text-2xl font-bold text-white mb-8">Other Projects</h2>
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {regularProjects.map((project, index) => {
-                  const primaryCategory = getPrimaryCategory(project);
                   const allCategories = getProjectCategories(project);
                   
                   return (
                     <div 
                       key={project.id}
                       className="glassmorphism overflow-hidden animate-fade-in hover:scale-105 transition-transform duration-300"
-                      style={{ animationDelay: `${(index + awardProjects.length) * 100}ms` }}
+                      style={{ animationDelay: `${(index + featuredProjects.length) * 100}ms` }}
                     >
                       <div className="relative h-48 overflow-hidden">
                         <img
