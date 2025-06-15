@@ -28,7 +28,14 @@ const availableCategories = [
   'Desktop',
   'API Development',
   'Database Design',
-  'Automation'
+  'Automation',
+  'Computer Vision',
+  'Natural Language Processing',
+  'Deep Learning',
+  'Data Engineering',
+  'Blockchain',
+  'IoT',
+  'Cybersecurity'
 ];
 
 const availableStatuses = [
@@ -60,7 +67,7 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
       onChange({ 
         ...data, 
         technologies: technologies.length > 0 ? technologies : [],
-        categories: categories.length > 0 ? categories : undefined
+        categories: categories.length > 0 ? categories : []
       });
       onSave();
     };
@@ -79,12 +86,12 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">Single Category (Legacy - Optional)</label>
-            <Select value={data.category || ''} onValueChange={(value) => onChange({ ...data, category: value || undefined })}>
+            <Select value={data.category || 'none'} onValueChange={(value) => onChange({ ...data, category: value === 'none' ? undefined : value })}>
               <SelectTrigger className="bg-black/50 border-green-500/20 text-white">
                 <SelectValue placeholder="Select category (optional)" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">No Category</SelectItem>
+                <SelectItem value="none">No Category</SelectItem>
                 {availableCategories.map((cat) => (
                   <SelectItem key={cat} value={cat}>{cat}</SelectItem>
                 ))}
@@ -93,12 +100,12 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">Status (Optional)</label>
-            <Select value={data.status || ''} onValueChange={(value) => onChange({ ...data, status: value || undefined })}>
+            <Select value={data.status || 'none'} onValueChange={(value) => onChange({ ...data, status: value === 'none' ? undefined : value })}>
               <SelectTrigger className="bg-black/50 border-green-500/20 text-white">
                 <SelectValue placeholder="Select status (optional)" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">No Status</SelectItem>
+                <SelectItem value="none">No Status</SelectItem>
                 {availableStatuses.map((status) => (
                   <SelectItem key={status} value={status}>{status}</SelectItem>
                 ))}
@@ -162,7 +169,7 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
               className="bg-black/50 border-green-500/20 text-white min-h-[120px]"
               placeholder="Full Stack&#10;Machine Learning&#10;Web Development&#10;Backend"
             />
-            <div className="mt-2 flex flex-wrap gap-1">
+            <div className="mt-2 flex flex-wrap gap-1 max-h-32 overflow-y-auto">
               {availableCategories.map((cat) => (
                 <button
                   key={cat}
@@ -222,6 +229,10 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
             data={newProject}
             onChange={setNewProject}
             onSave={() => {
+              if (!newProject.title || !newProject.description) {
+                alert('Title and description are required');
+                return;
+              }
               onCreate(newProject);
               setNewProject({});
               setShowNewForm(false);
