@@ -27,14 +27,14 @@ const HeroSection = () => {
 
   if (!personalInfo) {
     return (
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden pt-28 pb-20">
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden pt-28 pb-32">
         <div className="text-center text-white">Loading...</div>
       </section>
     );
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden pt-32 pb-20">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden pt-32 pb-32">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-96 h-96 bg-green-500/10 rounded-full blur-3xl top-1/4 left-1/4 animate-pulse"></div>
@@ -73,7 +73,7 @@ const HeroSection = () => {
             </Link>
           </div>
           
-          <div className="flex justify-center space-x-8 animate-fade-in animation-delay-800 mb-12">
+          <div className="flex justify-center space-x-8 animate-fade-in animation-delay-800 mb-20">
             {personalInfo.github_url && (
               <a 
                 href={personalInfo.github_url}
