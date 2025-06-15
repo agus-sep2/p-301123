@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
+import FileUpload from './FileUpload';
 
 interface ProjectsManagerProps {
   projects: Project[];
@@ -61,14 +62,6 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Image URL</label>
-            <Input
-              value={data.image_url || ''}
-              onChange={(e) => onChange({ ...data, image_url: e.target.value })}
-              className="bg-black/50 border-green-500/20 text-white"
-            />
-          </div>
-          <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">GitHub URL</label>
             <Input
               value={data.github_url || ''}
@@ -85,6 +78,13 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
             />
           </div>
         </div>
+        
+        <FileUpload
+          currentImageUrl={data.image_url || undefined}
+          onImageChange={(imageUrl) => onChange({ ...data, image_url: imageUrl || undefined })}
+          label="Project Image"
+        />
+        
         <div>
           <label className="block text-sm font-medium text-gray-300 mb-2">Description</label>
           <Textarea
@@ -157,9 +157,18 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
             ) : (
               <div>
                 <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h4 className="text-lg font-semibold text-white">{project.title}</h4>
-                    <p className="text-green-400">{project.category} - {project.status}</p>
+                  <div className="flex gap-4">
+                    {project.image_url && (
+                      <img 
+                        src={project.image_url} 
+                        alt={project.title}
+                        className="w-16 h-16 object-cover rounded-lg"
+                      />
+                    )}
+                    <div>
+                      <h4 className="text-lg font-semibold text-white">{project.title}</h4>
+                      <p className="text-green-400">{project.category} - {project.status}</p>
+                    </div>
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" onClick={() => setEditingId(project.id)}>

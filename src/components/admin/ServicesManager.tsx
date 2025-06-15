@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
+import FileUpload from './FileUpload';
 
 interface ServicesManagerProps {
   services: Service[];
@@ -60,15 +61,14 @@ const ServicesManager: React.FC<ServicesManagerProps> = ({ services, onCreate, o
               className="bg-black/50 border-green-500/20 text-white"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Image URL</label>
-            <Input
-              value={data.image_url || ''}
-              onChange={(e) => onChange({ ...data, image_url: e.target.value })}
-              className="bg-black/50 border-green-500/20 text-white"
-            />
-          </div>
         </div>
+        
+        <FileUpload
+          currentImageUrl={data.image_url || undefined}
+          onImageChange={(imageUrl) => onChange({ ...data, image_url: imageUrl || undefined })}
+          label="Service Image"
+        />
+        
         <div>
           <label className="block text-sm font-medium text-gray-300 mb-2">Description</label>
           <Textarea
@@ -141,9 +141,18 @@ const ServicesManager: React.FC<ServicesManagerProps> = ({ services, onCreate, o
             ) : (
               <div>
                 <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h4 className="text-lg font-semibold text-white">{service.title}</h4>
-                    <p className="text-green-400">{service.category}</p>
+                  <div className="flex gap-4">
+                    {service.image_url && (
+                      <img 
+                        src={service.image_url} 
+                        alt={service.title}
+                        className="w-16 h-16 object-cover rounded-lg"
+                      />
+                    )}
+                    <div>
+                      <h4 className="text-lg font-semibold text-white">{service.title}</h4>
+                      <p className="text-green-400">{service.category}</p>
+                    </div>
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" onClick={() => setEditingId(service.id)}>
