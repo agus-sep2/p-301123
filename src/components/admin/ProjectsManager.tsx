@@ -62,6 +62,15 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
             />
           </div>
           <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Award/Recognition</label>
+            <Input
+              value={(data as any).award || ''}
+              onChange={(e) => onChange({ ...data, award: e.target.value })}
+              placeholder="e.g., 1st Place Innovation Contest, Best Project Award"
+              className="bg-black/50 border-green-500/20 text-white"
+            />
+          </div>
+          <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">GitHub URL</label>
             <Input
               value={data.github_url || ''}
@@ -168,6 +177,9 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
                     <div>
                       <h4 className="text-lg font-semibold text-white">{project.title}</h4>
                       <p className="text-green-400">{project.category} - {project.status}</p>
+                      {(project as any).award && (
+                        <p className="text-yellow-400 text-sm">🏆 {(project as any).award}</p>
+                      )}
                     </div>
                   </div>
                   <div className="flex gap-2">

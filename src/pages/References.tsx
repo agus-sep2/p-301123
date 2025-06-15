@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from "react";
-import { ExternalLink, Github, Code, Database, BarChart3 } from "lucide-react";
+import { ExternalLink, Github, Code, Database, BarChart3, Award } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { Project, PersonalInfo } from "@/types/database";
 
@@ -130,15 +131,39 @@ const References = () => {
                       <span className="ml-2">{project.category}</span>
                     </div>
                   </div>
-                  <div className="absolute top-4 right-4 z-10">
+                  <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
                     <div className={`px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm shadow-lg ${getStatusColor(project.status)}`}>
                       {project.status}
                     </div>
+                    {(project as any).award && (
+                      <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-3 py-1 rounded-full text-xs flex items-center gap-1 shadow-lg">
+                        <Award size={12} />
+                        Outstanding
+                      </Badge>
+                    )}
                   </div>
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-3">{project.title}</h3>
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+                    {(project as any).award && (
+                      <div className="ml-2">
+                        <div className="text-yellow-400" title={(project as any).award}>
+                          <Award size={16} />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {(project as any).award && (
+                    <div className="mb-3">
+                      <Badge variant="outline" className="border-yellow-400 text-yellow-400 text-xs">
+                        🏆 {(project as any).award}
+                      </Badge>
+                    </div>
+                  )}
+                  
                   <p className="text-gray-300 mb-4 text-sm leading-relaxed">{project.description}</p>
                   
                   <div className="mb-4">
