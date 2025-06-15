@@ -37,6 +37,21 @@ export interface Project {
   updated_at: string;
 }
 
+export interface Experience {
+  id: string;
+  title: string;
+  company: string;
+  location?: string;
+  employment_type: string;
+  start_date: string;
+  end_date?: string;
+  is_current?: boolean;
+  description?: string;
+  skills?: string[];
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Profile {
   id: string;
   email: string;

@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Services from "./pages/Services";
 import References from "./pages/References";
 import Booking from "./pages/Booking";
+import Experience from "./pages/Experience";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
@@ -36,6 +37,7 @@ const App = () => (
                     <Route path="/services" element={<Services />} />
                     <Route path="/references" element={<References />} />
                     <Route path="/booking" element={<Booking />} />
+                    <Route path="/experience" element={<Experience />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>

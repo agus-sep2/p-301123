@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { PersonalInfo, Service, Project } from "@/types/database";
+import { PersonalInfo, Service, Project, Experience } from "@/types/database";
 import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -10,11 +9,13 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import PersonalInfoManager from "@/components/admin/PersonalInfoManager";
 import ServicesManager from "@/components/admin/ServicesManager";
 import ProjectsManager from "@/components/admin/ProjectsManager";
+import ExperienceManager from "@/components/admin/ExperienceManager";
 
 const AdminContent = () => {
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo | null>(null);
   const [services, setServices] = useState<Service[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
+  const [experiences, setExperiences] = useState<Experience[]>([]);
   const { toast } = useToast();
   const { user, signOut } = useAuth();
 
@@ -24,15 +25,17 @@ const AdminContent = () => {
 
   const fetchData = async () => {
     try {
-      const [personalResult, servicesResult, projectsResult] = await Promise.all([
+      const [personalResult, servicesResult, projectsResult, experiencesResult] = await Promise.all([
         supabase.from('personal_info').select('*').single(),
         supabase.from('services').select('*').order('created_at'),
-        supabase.from('projects').select('*').order('created_at')
+        supabase.from('projects').select('*').order('created_at'),
+        supabase.from('experiences').select('*').order('start_date', { ascending: false })
       ]);
 
       if (personalResult.data) setPersonalInfo(personalResult.data);
       if (servicesResult.data) setServices(servicesResult.data);
       if (projectsResult.data) setProjects(projectsResult.data);
+      if (experiencesResult.data) setExperiences(experiencesResult.data);
     } catch (error) {
       console.error('Error fetching data:', error);
       toast({
@@ -239,6 +242,89 @@ const AdminContent = () => {
     }
   };
 
+  const createExperience = async (data: Partial<Experience>) => {
+    try {
+      const { data: newExperienceData, error } = await supabase
+        .from('experiences')
+        .insert([{
+          title: data.title || '',
+          company: data.company || '',
+          location: data.location || '',
+          employment_type: data.employment_type || 'Full-time',
+          start_date: data.start_date || '',
+          end_date: data.end_date || null,
+          is_current: data.is_current || false,
+          description: data.description || '',
+          skills: data.skills || []
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setExperiences([...experiences, newExperienceData]);
+      toast({
+        title: "Success",
+        description: "Experience created successfully"
+      });
+    } catch (error) {
+      console.error('Error creating experience:', error);
+      toast({
+        title: "Error",
+        description: "Failed to create experience",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const updateExperience = async (id: string, data: Partial<Experience>) => {
+    try {
+      const { error } = await supabase
+        .from('experiences')
+        .update(data)
+        .eq('id', id);
+
+      if (error) throw error;
+
+      setExperiences(experiences.map(e => e.id === id ? { ...e, ...data } : e));
+      toast({
+        title: "Success",
+        description: "Experience updated successfully"
+      });
+    } catch (error) {
+      console.error('Error updating experience:', error);
+      toast({
+        title: "Error",
+        description: "Failed to update experience",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const deleteExperience = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('experiences')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      setExperiences(experiences.filter(e => e.id !== id));
+      toast({
+        title: "Success",
+        description: "Experience deleted successfully"
+      });
+    } catch (error) {
+      console.error('Error deleting experience:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete experience",
+        variant: "destructive"
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white p-6">
       <div className="max-w-7xl mx-auto">
@@ -271,6 +357,13 @@ const AdminContent = () => {
             onCreate={createProject}
             onUpdate={updateProject}
             onDelete={deleteProject}
+          />
+
+          <ExperienceManager
+            experiences={experiences}
+            onCreate={createExperience}
+            onUpdate={updateExperience}
+            onDelete={deleteExperience}
           />
         </div>
       </div>
