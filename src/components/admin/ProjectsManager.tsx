@@ -26,10 +26,16 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
     onCancel: () => void;
   }> = ({ data, onChange, onSave, onCancel }) => {
     const [technologiesText, setTechnologiesText] = useState(data.technologies?.join('\n') || '');
+    const [categoriesText, setCategoriesText] = useState(data.categories?.join('\n') || '');
 
     const handleSave = () => {
       const technologies = technologiesText.split('\n').filter(t => t.trim());
-      onChange({ ...data, technologies });
+      const categories = categoriesText.split('\n').filter(c => c.trim());
+      onChange({ 
+        ...data, 
+        technologies,
+        categories: categories.length > 0 ? categories : undefined
+      });
       onSave();
     };
 
@@ -45,19 +51,20 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Category</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Single Category (Legacy)</label>
             <Input
               value={data.category || ''}
               onChange={(e) => onChange({ ...data, category: e.target.value })}
+              placeholder="Optional - for backward compatibility"
               className="bg-black/50 border-green-500/20 text-white"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Status</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Status (Optional)</label>
             <Input
               value={data.status || ''}
               onChange={(e) => onChange({ ...data, status: e.target.value })}
-              placeholder="Completed, In Progress"
+              placeholder="e.g., Completed, In Progress, or leave empty"
               className="bg-black/50 border-green-500/20 text-white"
             />
           </div>
@@ -102,14 +109,31 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
             className="bg-black/50 border-green-500/20 text-white"
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">Technologies (one per line)</label>
-          <Textarea
-            value={technologiesText}
-            onChange={(e) => setTechnologiesText(e.target.value)}
-            className="bg-black/50 border-green-500/20 text-white min-h-[100px]"
-          />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Categories (one per line)
+              <span className="text-xs text-gray-400 block">e.g., Full Stack, Machine Learning, Web Development</span>
+            </label>
+            <Textarea
+              value={categoriesText}
+              onChange={(e) => setCategoriesText(e.target.value)}
+              className="bg-black/50 border-green-500/20 text-white min-h-[120px]"
+              placeholder="Full Stack&#10;Web Development&#10;Backend&#10;Frontend"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Technologies (one per line)</label>
+            <Textarea
+              value={technologiesText}
+              onChange={(e) => setTechnologiesText(e.target.value)}
+              className="bg-black/50 border-green-500/20 text-white min-h-[120px]"
+              placeholder="React&#10;TypeScript&#10;Node.js&#10;PostgreSQL"
+            />
+          </div>
         </div>
+        
         <div className="flex gap-2">
           <Button onClick={handleSave} className="bg-green-600 hover:bg-green-700">
             <Save className="mr-2 h-4 w-4" />
@@ -176,7 +200,34 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
                     )}
                     <div>
                       <h4 className="text-lg font-semibold text-white">{project.title}</h4>
-                      <p className="text-green-400">{project.category} - {project.status}</p>
+                      
+                      {/* Display categories */}
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {project.categories && project.categories.length > 0 ? (
+                          project.categories.map((cat, idx) => (
+                            <span key={idx} className="bg-purple-500/20 text-purple-400 px-2 py-1 rounded text-sm">
+                              {cat}
+                            </span>
+                          ))
+                        ) : project.category ? (
+                          <span className="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-sm">
+                            {project.category}
+                          </span>
+                        ) : (
+                          <span className="bg-gray-500/20 text-gray-400 px-2 py-1 rounded text-sm">
+                            No Category
+                          </span>
+                        )}
+                        
+                        {/* Status if exists */}
+                        {project.status && (
+                          <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-sm">
+                            {project.status}
+                          </span>
+                        )}
+                      </div>
+                      
+                      {/* Award if exists */}
                       {(project as any).award && (
                         <p className="text-yellow-400 text-sm">🏆 {(project as any).award}</p>
                       )}
@@ -192,13 +243,19 @@ const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onCreate, o
                   </div>
                 </div>
                 <p className="text-gray-300 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {project.technologies.map((tech, idx) => (
-                    <span key={idx} className="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-sm">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                
+                {/* Technologies */}
+                {project.technologies && project.technologies.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {project.technologies.map((tech, idx) => (
+                      <span key={idx} className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-sm">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                
+                {/* URLs */}
                 {(project.github_url || project.demo_url) && (
                   <div className="text-sm text-gray-400">
                     {project.github_url && <p><strong>GitHub:</strong> {project.github_url}</p>}

@@ -162,42 +162,45 @@ export type Database = {
       projects: {
         Row: {
           award: string | null
-          category: string
+          categories: string[] | null
+          category: string | null
           created_at: string
           demo_url: string | null
           description: string
           github_url: string | null
           id: string
           image_url: string | null
-          status: string
+          status: string | null
           technologies: string[] | null
           title: string
           updated_at: string
         }
         Insert: {
           award?: string | null
-          category: string
+          categories?: string[] | null
+          category?: string | null
           created_at?: string
           demo_url?: string | null
           description: string
           github_url?: string | null
           id?: string
           image_url?: string | null
-          status?: string
+          status?: string | null
           technologies?: string[] | null
           title: string
           updated_at?: string
         }
         Update: {
           award?: string | null
-          category?: string
+          categories?: string[] | null
+          category?: string | null
           created_at?: string
           demo_url?: string | null
           description?: string
           github_url?: string | null
           id?: string
           image_url?: string | null
-          status?: string
+          status?: string | null
           technologies?: string[] | null
           title?: string
           updated_at?: string
