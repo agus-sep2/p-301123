@@ -1,43 +1,26 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { User } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-import { PersonalInfo } from '@/types/database';
 
 const AboutSection = () => {
-  const [personalInfo, setPersonalInfo] = useState<PersonalInfo | null>(null);
-
-  useEffect(() => {
-    fetchPersonalInfo();
-  }, []);
-
-  const fetchPersonalInfo = async () => {
-    try {
-      const { data } = await supabase
-        .from('personal_info')
-        .select('*')
-        .single();
-      
-      if (data) setPersonalInfo(data);
-    } catch (error) {
-      console.error('Error fetching personal info:', error);
-    }
-  };
-
-  if (!personalInfo) return null;
-
   return (
     <section className="py-16 px-6 md:px-12">
       <div className="max-w-4xl mx-auto">
         <div className="glassmorphism p-8">
-          <div className="flex items-center mb-4">
+          <div className="flex items-center mb-6">
             <User className="text-green-400 mr-3" size={24} />
-            <h2 className="text-2xl font-bold text-white">About</h2>
+            <h2 className="text-2xl font-bold text-white">About Me</h2>
           </div>
           
-          <p className="text-gray-300 text-lg leading-relaxed">
-            {personalInfo.description}
-          </p>
+          <div className="space-y-4">
+            <p className="text-gray-300 text-lg leading-relaxed">
+              I'm a passionate full-stack developer and data scientist with a unique blend of technical expertise spanning frontend development, backend architecture, and machine learning. My journey in technology has been driven by a curiosity to solve complex problems and create meaningful digital experiences that make a real impact on users and businesses alike.
+            </p>
+            
+            <p className="text-gray-300 text-lg leading-relaxed">
+              What sets me apart is my ability to bridge the gap between data insights and user-friendly applications. Whether I'm building responsive web interfaces with modern frameworks, designing scalable backend systems, or extracting actionable insights from complex datasets, I approach every project with attention to detail and a commitment to delivering high-quality solutions that drive business value.
+            </p>
+          </div>
         </div>
       </div>
     </section>
