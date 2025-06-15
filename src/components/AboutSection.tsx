@@ -5,7 +5,7 @@ import { User } from 'lucide-react';
 const AboutSection = () => {
   return (
     <section className="py-16 px-6 md:px-12">
-      <div className="max-w-4xl mx-auto">
+      <div className="w-full">
         <div className="glassmorphism p-8">
           <div className="flex items-center mb-6">
             <User className="text-green-400 mr-3" size={24} />
