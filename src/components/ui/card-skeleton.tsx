@@ -8,16 +8,18 @@ interface CardSkeletonProps {
   showImage?: boolean;
   showFooter?: boolean;
   lines?: number;
+  style?: React.CSSProperties;
 }
 
 const CardSkeleton: React.FC<CardSkeletonProps> = ({
   className,
   showImage = true,
   showFooter = true,
-  lines = 3
+  lines = 3,
+  style
 }) => {
   return (
-    <div className={cn("glassmorphism overflow-hidden", className)}>
+    <div className={cn("glassmorphism overflow-hidden", className)} style={style}>
       {showImage && (
         <Skeleton className="h-52 w-full bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800" />
       )}
