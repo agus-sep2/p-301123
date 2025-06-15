@@ -107,27 +107,40 @@ const Index = () => {
       <section className="py-20 px-6 md:px-12 bg-psyco-black-light">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-2">What I Do</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              I create innovative digital solutions using modern technologies
+            <h2 className="text-3xl font-bold text-white mb-4">What I Do</h2>
+            <p className="text-gray-400 max-w-3xl mx-auto text-lg leading-relaxed">
+              I specialize in building comprehensive digital solutions that bridge the gap between complex data insights and user-friendly interfaces. From crafting responsive frontend experiences to architecting robust backend systems and extracting meaningful patterns from data.
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: "Frontend", icon: <Code size={32} /> },
-              { name: "Backend", icon: <Database size={32} /> },
-              { name: "Data Science", icon: <BarChart3 size={32} /> }
+              { 
+                name: "Frontend Development", 
+                icon: <Code size={32} />,
+                description: "Creating intuitive and responsive user interfaces"
+              },
+              { 
+                name: "Backend Development", 
+                icon: <Database size={32} />,
+                description: "Building scalable server-side applications and APIs"
+              },
+              { 
+                name: "Data Science", 
+                icon: <BarChart3 size={32} />,
+                description: "Analyzing data to extract actionable business insights"
+              }
             ].map((specialty, index) => (
               <div 
                 key={index}
-                className="glassmorphism flex flex-col items-center justify-center py-8 px-4 text-center card-hover animate-fade-in"
+                className="glassmorphism flex flex-col items-center justify-center py-8 px-6 text-center card-hover animate-fade-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="text-green-400 mb-4">
                   {specialty.icon}
                 </div>
-                <h3 className="text-lg font-medium text-white">{specialty.name}</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">{specialty.name}</h3>
+                <p className="text-gray-400 text-sm">{specialty.description}</p>
               </div>
             ))}
           </div>
