@@ -27,14 +27,14 @@ const HeroSection = () => {
 
   if (!personalInfo) {
     return (
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden pt-20">
         <div className="text-center text-white">Loading...</div>
       </section>
     );
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-psyco-black-light to-black overflow-hidden pt-20">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-96 h-96 bg-green-500/10 rounded-full blur-3xl top-1/4 left-1/4 animate-pulse"></div>

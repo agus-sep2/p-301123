@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Experience, Education, SiteSetting } from '@/types/database';
@@ -73,14 +72,14 @@ const ExperiencePage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-psyco-black-light to-black flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-black via-psyco-black-light to-black flex items-center justify-center pt-24">
         <div className="text-white text-xl">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-psyco-black-light to-black">
+    <div className="min-h-screen bg-gradient-to-br from-black via-psyco-black-light to-black pt-24">
       <div className="container mx-auto px-6 py-16">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
