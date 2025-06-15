@@ -43,13 +43,13 @@ const References = () => {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "Frontend":
-        return "bg-blue-500/90 text-white";
+        return "bg-blue-500 text-white";
       case "Backend":
-        return "bg-purple-500/90 text-white";
+        return "bg-purple-500 text-white";
       case "Data Science":
-        return "bg-orange-500/90 text-white";
+        return "bg-orange-500 text-white";
       default:
-        return "bg-green-500/90 text-white";
+        return "bg-green-500 text-white";
     }
   };
 
@@ -118,72 +118,67 @@ const References = () => {
           {/* Award-Winning Projects - Featured Section */}
           {awardProjects.length > 0 && (
             <div className="mb-16">
-              <h2 className="text-3xl font-bold text-white mb-8 text-center">
-                🏆 Award-Winning Projects
+              <h2 className="text-3xl font-bold text-white mb-12 text-center flex items-center justify-center gap-3">
+                <Award size={32} className="text-yellow-400" />
+                Award-Winning Projects
               </h2>
-              <div className="space-y-8">
+              <div className="space-y-12">
                 {awardProjects.map((project, index) => (
                   <div 
                     key={project.id}
-                    className="glassmorphism overflow-hidden animate-fade-in hover:scale-[1.02] transition-all duration-500 border-2 border-yellow-400/30"
+                    className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-psyco-black-light to-psyco-black border-2 border-yellow-400/30 animate-fade-in hover:scale-[1.01] transition-all duration-500 shadow-2xl"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                    {/* Award Badge - Floating */}
+                    <div className="absolute top-6 left-6 z-30">
+                      <div className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 text-black font-bold px-6 py-3 rounded-full text-lg flex items-center gap-3 shadow-2xl animate-pulse-glow">
+                        <Award size={24} />
+                        <span>Award Winner</span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[500px]">
                       {/* Image Section */}
-                      <div className="relative h-80 lg:h-96 overflow-hidden">
+                      <div className="relative h-80 lg:h-full overflow-hidden">
                         <img
                           src={project.image_url || "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80"}
                           alt={project.title}
-                          className="object-cover h-full w-full transition-transform duration-500 hover:scale-110"
+                          className="object-cover h-full w-full transition-transform duration-700 hover:scale-110"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent"></div>
-                        
-                        {/* Award Badge - Large and Prominent */}
-                        <div className="absolute top-6 left-6 z-20">
-                          <div className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 text-black font-bold px-6 py-3 rounded-full text-lg flex items-center gap-3 shadow-2xl animate-pulse-glow">
-                            <Award size={24} />
-                            <span>Award Winner</span>
-                          </div>
-                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
 
-                        {/* Category Badge */}
-                        <div className="absolute top-6 right-6 z-10">
-                          <div className={`backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium flex items-center shadow-lg ${getCategoryColor(project.category)}`}>
+                        {/* Category Badge - Bottom Left */}
+                        <div className="absolute bottom-6 left-6 z-20">
+                          <div className={`backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium flex items-center shadow-lg ${getCategoryColor(project.category)}`}>
                             {getIconComponent(project.category)}
                             <span className="ml-2">{project.category}</span>
-                          </div>
-                        </div>
-
-                        {/* Status Badge */}
-                        <div className="absolute bottom-6 right-6 z-10">
-                          <div className={`px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm shadow-lg ${getStatusColor(project.status)}`}>
-                            {project.status}
                           </div>
                         </div>
                       </div>
                       
                       {/* Content Section */}
-                      <div className="p-8 lg:p-10">
-                        <div className="flex items-start justify-between mb-4">
-                          <h3 className="text-3xl font-bold text-white leading-tight">{project.title}</h3>
+                      <div className="p-8 lg:p-12 flex flex-col justify-center">
+                        <div className="mb-6">
+                          <h3 className="text-4xl font-bold text-white leading-tight mb-4">{project.title}</h3>
+                          
+                          {/* Award Details */}
+                          <div className="mb-6">
+                            <div className="bg-gradient-to-r from-yellow-400/20 to-orange-500/20 border border-yellow-400/30 text-yellow-400 font-bold px-6 py-3 rounded-xl text-lg flex items-center gap-3 backdrop-blur-sm">
+                              <Award size={20} />
+                              {project.award}
+                            </div>
+                          </div>
                         </div>
                         
-                        {/* Award Details */}
-                        <div className="mb-6">
-                          <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-4 py-2 rounded-full text-base">
-                            🏆 {project.award}
-                          </Badge>
-                        </div>
+                        <p className="text-gray-300 mb-8 text-lg leading-relaxed">{project.description}</p>
                         
-                        <p className="text-gray-300 mb-6 text-lg leading-relaxed">{project.description}</p>
-                        
-                        <div className="mb-6">
-                          <h4 className="text-lg font-semibold text-white mb-3">Technologies Used:</h4>
+                        <div className="mb-8">
+                          <h4 className="text-lg font-semibold text-white mb-4">Technologies Used:</h4>
                           <div className="flex flex-wrap gap-3">
                             {project.technologies.map((tech, idx) => (
                               <span 
                                 key={idx}
-                                className="bg-psyco-black-light text-green-400 px-3 py-2 rounded-lg text-sm font-medium border border-green-500/30"
+                                className="bg-green-500/20 text-green-400 px-4 py-2 rounded-lg text-sm font-medium border border-green-500/30 backdrop-blur-sm"
                               >
                                 {tech}
                               </span>
@@ -197,9 +192,9 @@ const References = () => {
                               href={project.github_url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center text-green-400 hover:text-green-300 transition-colors font-medium text-lg btn-glow"
+                              className="inline-flex items-center text-green-400 hover:text-green-300 transition-all duration-300 font-medium text-lg group"
                             >
-                              <Github className="mr-3 h-6 w-6" />
+                              <Github className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" />
                               Source Code
                               <ExternalLink className="ml-2 h-4 w-4" />
                             </a>
@@ -209,9 +204,9 @@ const References = () => {
                               href={project.demo_url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium text-lg btn-glow"
+                              className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-all duration-300 font-medium text-lg group"
                             >
-                              <ExternalLink className="mr-3 h-6 w-6" />
+                              <ExternalLink className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" />
                               Live Demo
                             </a>
                           )}
