@@ -161,6 +161,7 @@ export type Database = {
       }
       projects: {
         Row: {
+          award: string | null
           category: string
           created_at: string
           demo_url: string | null
@@ -174,6 +175,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          award?: string | null
           category: string
           created_at?: string
           demo_url?: string | null
@@ -187,6 +189,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          award?: string | null
           category?: string
           created_at?: string
           demo_url?: string | null

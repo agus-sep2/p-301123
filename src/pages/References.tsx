@@ -135,10 +135,10 @@ const References = () => {
                     <div className={`px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm shadow-lg ${getStatusColor(project.status)}`}>
                       {project.status}
                     </div>
-                    {(project as any).award && (
+                    {project.award && (
                       <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-3 py-1 rounded-full text-xs flex items-center gap-1 shadow-lg">
                         <Award size={12} />
-                        Outstanding
+                        Award Winner
                       </Badge>
                     )}
                   </div>
@@ -147,19 +147,19 @@ const References = () => {
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-                    {(project as any).award && (
+                    {project.award && (
                       <div className="ml-2">
-                        <div className="text-yellow-400" title={(project as any).award}>
+                        <div className="text-yellow-400" title={project.award}>
                           <Award size={16} />
                         </div>
                       </div>
                     )}
                   </div>
                   
-                  {(project as any).award && (
+                  {project.award && (
                     <div className="mb-3">
                       <Badge variant="outline" className="border-yellow-400 text-yellow-400 text-xs">
-                        🏆 {(project as any).award}
+                        🏆 {project.award}
                       </Badge>
                     </div>
                   )}
@@ -180,18 +180,31 @@ const References = () => {
                     </div>
                   </div>
                   
-                  {project.github_url && (
-                    <a
-                      href={project.github_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center text-green-400 hover:text-green-300 transition-colors font-medium"
-                    >
-                      <Github className="mr-2 h-4 w-4" />
-                      View Source
-                      <ExternalLink className="ml-1 h-3 w-3" />
-                    </a>
-                  )}
+                  <div className="flex gap-4">
+                    {project.github_url && (
+                      <a
+                        href={project.github_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-green-400 hover:text-green-300 transition-colors font-medium text-sm"
+                      >
+                        <Github className="mr-2 h-4 w-4" />
+                        Source
+                        <ExternalLink className="ml-1 h-3 w-3" />
+                      </a>
+                    )}
+                    {project.demo_url && (
+                      <a
+                        href={project.demo_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium text-sm"
+                      >
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Demo
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
