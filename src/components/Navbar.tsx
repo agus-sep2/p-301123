@@ -3,11 +3,34 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { supabase } from '@/integrations/supabase/client';
+import { SiteSetting } from '@/types/database';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [settings, setSettings] = useState<SiteSetting[]>([]);
   const location = useLocation();
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
+
+  const fetchSettings = async () => {
+    try {
+      const { data } = await supabase
+        .from('site_settings')
+        .select('*');
+      
+      if (data) setSettings(data);
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+    }
+  };
+
+  const getSetting = (key: string) => {
+    return settings.find(s => s.setting_key === key)?.setting_value ?? true;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,13 +51,18 @@ const Navbar = () => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  const navLinks = [
+  const baseNavLinks = [
     { name: 'Home', path: '/' },
     { name: 'Skills', path: '/services' },
     { name: 'Projects', path: '/references' },
-    { name: 'Experience', path: '/experience' },
     { name: 'Contact', path: '/booking' },
   ];
+
+  // Add Experience link conditionally based on settings
+  const navLinks = [...baseNavLinks];
+  if (getSetting('show_experience_menu')) {
+    navLinks.splice(3, 0, { name: 'Experience', path: '/experience' });
+  }
 
   const handleNavClick = () => {
     // Close mobile menu and scroll to top

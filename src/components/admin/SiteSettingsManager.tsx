@@ -26,6 +26,17 @@ const SiteSettingsManager: React.FC<SiteSettingsManagerProps> = ({
       <div className="space-y-6">
         <div className="flex items-center justify-between p-4 bg-black/30 rounded-lg border border-green-500/20">
           <div>
+            <h4 className="text-white font-medium">Experience Menu</h4>
+            <p className="text-gray-400 text-sm">Show or hide the Experience menu item in navigation</p>
+          </div>
+          <Switch
+            checked={getSetting('show_experience_menu')}
+            onCheckedChange={(checked) => onUpdate('show_experience_menu', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between p-4 bg-black/30 rounded-lg border border-green-500/20">
+          <div>
             <h4 className="text-white font-medium">Experience Section</h4>
             <p className="text-gray-400 text-sm">Show or hide the experience section on your portfolio</p>
           </div>
